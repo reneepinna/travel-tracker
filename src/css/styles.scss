@@ -13,3 +13,56 @@ html {
 body {
   font-size: 1.6rem;
 }
+
+header {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: antiquewhite;
+}
+
+main {
+  background-color: burlywood;
+  padding: 2rem;
+}
+
+//-------- Trips Board ---------//
+
+.trips-board {
+  background-color: brown;
+  padding: 1rem;
+  width: 60%;
+  max-width: 100rem;
+}
+
+.trips-board__group {
+  background-color: antiquewhite;
+  min-height: 50rem;
+}
+
+.trips-board__tab-bar {
+  background-color: antiquewhite; 
+}
+
+.trips-board__tab {
+  border: 0;
+  width: 20%;
+  min-height: 3rem;
+  background-color: burlywood; 
+}
+
+.upcoming {
+  background-color: beige;
+  display: block;
+}
+
+.pending {
+  background-color: bisque;
+  display: none;
+}
+
+.past {
+  background-color: pink;
+  display: none;
+}

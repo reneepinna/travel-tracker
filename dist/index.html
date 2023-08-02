@@ -7,10 +7,27 @@
   <title>Travel Tracker</title>
 </head>
 <body>
-
-  
+  <header>
+    <h1>Travel Tracker</h1>
+    <nav>
+      <button>Home</button>
+      <button>Make Reservations</button>
+    </nav>
+    <p>Greetings</p>
+  </header>
+  <main>
+    <section class='trips-board'>
+      <div class='trips-board__tab-bar'>
+        <button id='upcoming' class='trips-board__tab'>Upcoming</button>
+          <button id='pending' class='trips-board__tab'>Pending</button>
+        <button id='past' class='trips-board__tab'>Past</button>
+        </div>
+      <article id="upcomingGroup" class='trips-board__group upcoming'></article>
+      <article id="pendingGroup" class='trips-board__group pending'></article>
+      <article id="pastGroup" class='trips-board__group past'></article>
+    </section>
+  </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
