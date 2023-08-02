@@ -1,3 +1,9 @@
+// variables
+$accentColor: #34a0a4;
+$lightAccentColor: lighten($accentColor, 40%);
+$lightColor: #f1f2f6;
+
+
 *,
 *::after,
 *::before {
@@ -12,57 +18,57 @@ html {
 
 body {
   font-size: 1.6rem;
+  display: flex;
+  width: 100%;
+
 }
 
-header {
+// header {
+//   padding: 2rem;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   background-color: $accentColor;
+// }
+
+main {
+  width: 100%;
+}
+
+.control-bar {
+  background-color: #34a0a4;
+  min-height: 100rem;;
+  width: 15%;
   padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: antiquewhite;
+  max-width: 30rem;
+
 }
 
 main {
-  background-color: burlywood;
   padding: 2rem;
 }
 
-//-------- Trips Board ---------//
 
 .trips-board {
-  background-color: brown;
-  padding: 1rem;
+  background-color: $lightAccentColor;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   width: 60%;
   max-width: 100rem;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 1rem;
 }
 
 .trips-board__group {
-  background-color: antiquewhite;
-  min-height: 50rem;
-}
+  background-color: white;
+  min-height: 60rem;
+  border-radius: 1rem;
 
-.trips-board__tab-bar {
-  background-color: antiquewhite; 
-}
-
-.trips-board__tab {
-  border: 0;
-  width: 20%;
-  min-height: 3rem;
-  background-color: burlywood; 
-}
-
-.upcoming {
-  background-color: beige;
-  display: block;
-}
-
-.pending {
-  background-color: bisque;
-  display: none;
-}
-
-.past {
-  background-color: pink;
-  display: none;
+  .trips-board__header {
+    background-color: $lightAccentColor;
+    padding: .7rem;
+    text-align: center;
+    // border-radius: 1rem;
+  }
 }

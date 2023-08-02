@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Tracker</title>
-</head>
-<body>
-  <header>
-    <h1>Travel Tracker</h1>
-    <nav>
-      <button>Home</button>
-      <button>Make Reservations</button>
-    </nav>
-    <p>Greetings</p>
-  </header>
-  <main>
-    <section class='trips-board'>
-      <div class='trips-board__tab-bar'>
-        <button id='upcoming' class='trips-board__tab'>Upcoming</button>
-          <button id='pending' class='trips-board__tab'>Pending</button>
-        <button id='past' class='trips-board__tab'>Past</button>
-        </div>
-      <article id="upcomingGroup" class='trips-board__group upcoming'></article>
-      <article id="pendingGroup" class='trips-board__group pending'></article>
-      <article id="pastGroup" class='trips-board__group past'></article>
-    </section>
-  </main>
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Tracker</title>
+  </head>
+  <body>
+    <aside class="control-bar">
+      <h1>Travel Tracker</h1>
+      <nav>
+        <button>Home</button>
+        <button>Make Reservations</button>
+      </nav>
+      <p>Greetings</p>
+    </aside>
+    <main>
+      <section class="trips-board">
+        <article id="upcomingGroup" class="trips-board__group upcoming">
+          <h3 id="upcoming" class="trips-board__header">Upcoming</h3>
+        </article>
+        <article id="pendingGroup" class="trips-board__group pending">
+          <h3 id="pending" class="trips-board__header">Pending</h3>
+        </article>
+        <article id="pastGroup" class="trips-board__group past">
+          <h3 id="past" class="trips-board__header">Past</h3>
+        </article>
+      </section>
+    </main>
+    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+    <script src="bundle.js"></script>
+  </body>
 </html>
