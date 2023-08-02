@@ -37,8 +37,8 @@ window.addEventListener('load', () => {
 function initializeData(userID) {
   Promise.all([
     getApiData(`http://localhost:3001/api/v1/travelers/${userID}`),
-    getApiData('http://localhost:3001/api/v1/trips'),
-    getApiData('http://localhost:3001/api/v1/destinations')
+    getApiData('http://localhost:3001/api/v1/trips', 'trips'),
+    getApiData('http://localhost:3001/api/v1/destinations', 'destinations')
   ])
   .then(values => {
     const [user, trips, destinations] = values;
