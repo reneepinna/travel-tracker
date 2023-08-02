@@ -1,0 +1,74 @@
+// variables
+$accentColor: #34a0a4;
+$lightAccentColor: lighten($accentColor, 40%);
+$lightColor: #f1f2f6;
+
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  display: flex;
+  width: 100%;
+
+}
+
+// header {
+//   padding: 2rem;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   background-color: $accentColor;
+// }
+
+main {
+  width: 100%;
+}
+
+.control-bar {
+  background-color: #34a0a4;
+  min-height: 100rem;;
+  width: 15%;
+  padding: 2rem;
+  max-width: 30rem;
+
+}
+
+main {
+  padding: 2rem;
+}
+
+
+.trips-board {
+  background-color: $lightAccentColor;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 60%;
+  max-width: 100rem;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 1rem;
+}
+
+.trips-board__group {
+  background-color: white;
+  min-height: 60rem;
+  border-radius: 1rem;
+
+  .trips-board__header {
+    background-color: $lightAccentColor;
+    padding: .7rem;
+    text-align: center;
+    // border-radius: 1rem;
+  }
+}
