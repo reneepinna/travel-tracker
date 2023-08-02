@@ -73,7 +73,35 @@ main {
   }
 }
 
+// Trip Card
+
 .card {
+  background-color: white;
+  max-width: 30rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  display: flex
+}
+
+
+.card__img {
+  object-fit: fill;
+  height: 10rem;
+  width: 10rem;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 2rem;
+}
+
+.card__info {
+  
+  padding: 1rem;
+}
+
+
+// Destination Card
+
+.destCard {
   background-color: white;
   max-width: 20rem;
   padding: 1rem;
@@ -81,12 +109,12 @@ main {
   position: relative;
 }
 
-.card__img {
+.destCard__img {
   width: 100%;
   border-radius: 2rem;
 }
 
-.card__price {
+.destCard__price {
   display: inline-block;
   border-radius: 100rem;
   background-color: #f1f2f6;
@@ -99,7 +127,7 @@ main {
   
 }
 
-.card__button {
+.destCard__button {
   background-color: #34a0a4;
   color: white;
   padding: .6rem;

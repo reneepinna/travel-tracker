@@ -4,8 +4,9 @@ const dayjs = require('dayjs');
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
-import { getUserTrips } from './model';
+import { getUserTrips, sortTripGroup } from './model';
 import { getApiData } from './apiCalls';
+import { displayUserData, displayUserTrips } from './dom-updates';
 
 function initializeStore() {
   const store = {};
@@ -40,6 +41,13 @@ function initializeData(userID) {
     store.setKey('user', user);
     store.setKey('userTrips', getUserTrips(trips, userID));
     store.setKey('destinations', destinations);
-    store.viewStore();
-  });
+   
+
+  })
+    .then(emp => {
+      displayUserData(store.getKey('user'))
+      store.setKey('tripGroups', sortTripGroup(store.getKey('userTrips')))
+      displayUserTrips(store.getKey('tripGroups'), store.getKey('destinations'))
+      store.viewStore()
+    })
 }
