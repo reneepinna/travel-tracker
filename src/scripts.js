@@ -10,9 +10,29 @@ import {
   
 } from './apiCalls';
 
-// function initializeDataModel() {
-//   return 
-// }
+function initializeStore() {
+
+  const store = {}
+
+  return {
+    viewStore: function() {
+      console.log(store);
+    },
+    setKey: function(key, value) {
+      store[key] = value;
+    },
+    getKey: function(key) {
+      return store[key];
+    }
+  }
+}
+
+let store;
+
+window.addEventListener('load', () => {
+  store = initializeStore();
+  initializeData(1)
+})
 
 function initializeData(userID) {
   Promise.all([
@@ -20,6 +40,16 @@ function initializeData(userID) {
     getApiData('http://localhost:3001/api/v1/trips'),
     getApiData('http://localhost:3001/api/v1/destinations')
   ])
+  .then(values => {
+    const [user, trips, destinations] = values;
+
+    // getUserTrips(trips)
+
+    store.setKey('user', user);
+    store.setKey('userTrips', trips);
+    store.setKey('destinations', destinations);
+    store.viewStore();
+  })
 }
 
 
