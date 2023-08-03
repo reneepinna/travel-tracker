@@ -3,7 +3,6 @@ $accentColor: #34a0a4;
 $lightAccentColor: lighten($accentColor, 40%);
 $lightColor: #f1f2f6;
 
-
 *,
 *::after,
 *::before {
@@ -20,7 +19,6 @@ body {
   font-size: 1.6rem;
   display: flex;
   width: 100%;
-
 }
 
 // header {
@@ -37,17 +35,15 @@ main {
 
 .control-bar {
   background-color: #34a0a4;
-  min-height: 100rem;;
+  min-height: 100rem;
   width: 15%;
   padding: 2rem;
   max-width: 30rem;
-
 }
 
 main {
   padding: 2rem;
 }
-
 
 .trips-board {
   background-color: $lightAccentColor;
@@ -67,7 +63,7 @@ main {
 
   .trips-board__header {
     background-color: $lightAccentColor;
-    padding: .7rem;
+    padding: 0.7rem;
     text-align: center;
     // border-radius: 1rem;
   }
@@ -75,16 +71,15 @@ main {
 
 // Trip Card
 
-.card {
+.tripCard {
   background-color: white;
   max-width: 30rem;
   padding: 1rem;
   border-radius: 2rem;
-  display: flex
+  display: flex;
 }
 
-
-.card__img {
+.tripCard__img {
   object-fit: fill;
   height: 10rem;
   width: 10rem;
@@ -93,11 +88,9 @@ main {
   border-radius: 2rem;
 }
 
-.card__info {
-  
+.tripCard__info {
   padding: 1rem;
 }
-
 
 // Destination Card
 
@@ -118,21 +111,20 @@ main {
   display: inline-block;
   border-radius: 100rem;
   background-color: #f1f2f6;
-  padding: .6rem;
-  
-    span {
-      font-size: 1.4rem;
-      color: grey;
-    }
-  
+  padding: 0.6rem;
+
+  span {
+    font-size: 1.4rem;
+    color: grey;
+  }
 }
 
 .destCard__button {
   background-color: #34a0a4;
   color: white;
-  padding: .6rem;
+  padding: 0.6rem;
   border-radius: 100rem;
   position: absolute;
   bottom: 1rem;
-  right:1rem;
+  right: 1rem;
 }

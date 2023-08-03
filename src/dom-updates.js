@@ -35,14 +35,14 @@ function renderTripCards(groupName, trips, destinations) {
     const date = dayjs(trip.date, 'YYYY/MM/DD');
 
     group.innerHTML += `<article class='card'>
-      <img class='card__img' src=${destination.image}/>
-      <div class='card__info'>
-        <p class='card__location'>${destination.destination}</p>
-        <p class='card__text'>${date.format('MM/DD/YYYY')}</p>
-        <p class='card__text'>${date
+      <img class='tripCard__img' src=${destination.image}/>
+      <div class='tripCard__info'>
+        <p class='tripCard__location'>${destination.destination}</p>
+        <p class='tripCard__text'>${date.format('MM/DD/YYYY')}</p>
+        <p class='tripCard__text'>${date
           .add(trip.duration, 'day')
           .format('MM/DD/YYYY')}</p>
-        <p class='card__text'>${trip.travelers} people</p>
+        <p class='tripCard__text'>${trip.travelers} people</p>
       <div>
     </article>`;
   });
