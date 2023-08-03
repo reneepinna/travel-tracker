@@ -88,6 +88,8 @@ describe('sortTripGroups', () => {
   it('should sort any pending trips into pendingGroup even if the trip is scheduled in the past', () => {
     const groups = sortTripGroup(userTrips);
 
+    console.log(groups)
+
     expect(groups.pendingGroup).to.deep.equal([
       {
         id: 9,
@@ -196,19 +198,56 @@ describe('getUserDestinations', () => {
         alt: 'opera house and city buildings on the water with boats',
       },
     ]);
+  });
 
-    it('should return an empty array there are no trips', () => {
-      userID = 5;
-      userTrips = getUserTrips(data.trips, userID);
+  it('should return an empty array there are no trips', () => {
+    userID = 5;
+    userTrips = getUserTrips(data.trips, userID);
 
-      const userDestinations = getUserDestinations(
-        data.destinations,
-        userTrips,
-      );
+    const userDestinations = getUserDestinations(data.destinations, userTrips);
 
-      expect(userDestinations).to.deep.equal([]);
-    });
+    expect(userDestinations).to.deep.equal([]);
   });
 });
 
-describe('getCostForYear', () => {});
+describe('getCostForYear', () => {
+  let userID;
+  let userTrips;
+  let userDestinations;
+
+  beforeEach(() => {
+    userID = 1;
+    userTrips = getUserTrips(data.trips, userID);
+    userDestinations = getUserDestinations(data.destinations, userTrips);
+  });
+
+  it('should return a number representing the price of all trips the user has taken and a 10% fee', () => {
+    const userID = 1;
+    const userTrips = getUserTrips(data.trips, userID);
+    const userDestinations = getUserDestinations(data.destinations, userTrips);
+
+    const cost = getCostPerYear(userTrips, userDestinations)
+
+    expect(cost).to.equal(7421)
+  })
+
+  it('should return 0 if there are no trips for this year', () => {
+    const userID = 5;
+    const userTrips = getUserTrips(data.trips, userID);
+    const userDestinations = getUserDestinations(data.destinations, userTrips);
+
+    const cost = getCostPerYear(userTrips, userDestinations)
+
+    expect(cost).to.equal(0)
+  })
+
+  it('should only calculate the cost for approved trips booked for this year', () => {
+    const userID = 4;
+    const userTrips = getUserTrips(data.trips, userID);
+    const userDestinations = getUserDestinations(data.destinations, userTrips);
+
+    const cost = getCostPerYear(userTrips, userDestinations)
+
+    expect(cost).to.equal(28270)
+  })
+});
