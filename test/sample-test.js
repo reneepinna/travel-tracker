@@ -2,7 +2,7 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import data from './sample-data.js';
-import { getUserTrips, sortTripGroup, getCostForYear } from '../src/model.js';
+import { getUserTrips, sortTripGroup, getCostThisYear } from '../src/model.js';
 
 describe('getUserTrips', function () {
   it('should return an array of only trips the user has taken', () => {
@@ -151,23 +151,15 @@ describe('sortTripGroups', () => {
   });
 });
 
-describe('getCostForYear', () => {
+describe('getCostThisYear', () => {
   let userID;
   let userTrips;
-  let userDestinations;
-
-  beforeEach(() => {
-    userID = 1;
-    userTrips = getUserTrips(data.trips, userID);
-    userDestinations = getUserDestinations(data.destinations, userTrips);
-  });
 
   it('should return a number representing the cost of all trips the user has taken and a 10% fee', () => {
     const userID = 2;
     const userTrips = getUserTrips(data.trips, userID);
-    const userDestinations = getUserDestinations(data.destinations, userTrips);
 
-    const cost = getCostForYear(userTrips, userDestinations);
+    const cost = getCostThisYear(userTrips, data.destinations);
 
     expect(cost).to.equal(7216);
   });
@@ -175,9 +167,8 @@ describe('getCostForYear', () => {
   it('should return 0 if there are no trips for this year', () => {
     const userID = 5;
     const userTrips = getUserTrips(data.trips, userID);
-    const userDestinations = getUserDestinations(data.destinations, userTrips);
-
-    const cost = getCostForYear(userTrips, userDestinations);
+  
+    const cost = getCostThisYear(userTrips, data.destinations);
 
     expect(cost).to.equal(0);
   });
@@ -186,9 +177,7 @@ describe('getCostForYear', () => {
     const userID = 4;
     const userTrips = getUserTrips(data.trips, userID);
 
-    const userDestinations = getUserDestinations(data.destinations, userTrips);
-
-    const cost = getCostForYear(userTrips, userDestinations);
+    const cost = getCostThisYear(userTrips, data.destinations);
 
     expect(cost).to.equal(28270);
   });

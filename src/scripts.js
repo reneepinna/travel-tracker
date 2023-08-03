@@ -4,9 +4,9 @@ const dayjs = require('dayjs');
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
-import { getUserTrips, sortTripGroup } from './model';
+import { getCostThisYear, getUserTrips, sortTripGroup } from './model';
 import { getApiData } from './apiCalls';
-import { displayUserData, displayUserTrips } from './dom-updates';
+import { displayCostThisYear, displayUserData, displayUserTrips } from './dom-updates';
 
 function initializeStore() {
   const store = {};
@@ -36,18 +36,22 @@ function initializeData(userID) {
     getApiData(`http://localhost:3001/api/v1/travelers/${userID}`),
     getApiData('http://localhost:3001/api/v1/trips', 'trips'),
     getApiData('http://localhost:3001/api/v1/destinations', 'destinations'),
-  ]).then(values => {
-    const [user, trips, destinations] = values;
-    store.setKey('user', user);
-    store.setKey('userTrips', getUserTrips(trips, userID));
-    store.setKey('destinations', destinations);
-   
-
-  })
-    .then(emp => {
-      displayUserData(store.getKey('user'))
-      store.setKey('tripGroups', sortTripGroup(store.getKey('userTrips')))
-      displayUserTrips(store.getKey('tripGroups'), store.getKey('destinations'))
-      store.viewStore()
+  ])
+    .then(values => {
+      const [user, trips, destinations] = values;
+      store.setKey('user', user);
+      store.setKey('userTrips', getUserTrips(trips, userID));
+      store.setKey('destinations', destinations);
     })
+    .then(emp => {
+      store.setKey('tripGroups', sortTripGroup(store.getKey('userTrips')));
+      store.setKey('costThisYear', getCostThisYear(store.getKey('userTrips'), store.getKey('destinations')))
+      displayDashboard();
+    });
+}
+
+function displayDashboard() {
+  displayCostThisYear(store.getKey('costThisYear'))
+  displayUserData(store.getKey('user'));
+  displayUserTrips(store.getKey('tripGroups'), store.getKey('destinations'));
 }

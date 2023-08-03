@@ -4,7 +4,7 @@ export function getUserTrips(trips, userID) {
   return trips.filter(trip => trip.userID === userID);
 }
 
-export function getCostForYear(trips, destinations) {
+export function getCostThisYear(trips, destinations) {
   const thisYear = dayjs().format('YYYY');
 
   const thisYearsTrips = trips.filter(
