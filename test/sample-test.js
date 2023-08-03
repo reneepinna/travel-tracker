@@ -2,10 +2,14 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import data from './sample-data.js';
-import { getUserTrips, sortTripGroup } from '../src/model.js';
+import {
+  getUserDestinations,
+  getUserTrips,
+  sortTripGroup,
+} from '../src/model.js';
 
 describe('getUserTrips', function () {
-  it('should return an array of only trips taken by the user passed in', () => {
+  it('should return an array of only trips the user has taken', () => {
     const userID = 1;
     const userTrips = getUserTrips(data.trips, userID);
 
@@ -111,29 +115,33 @@ describe('sortTripGroups', () => {
   it('should sort approved trips based on if they are scheduled before or after the current date', () => {
     const groups = sortTripGroup(userTrips);
 
-    expect(groups.pastGroup).to.deep.equal([{
-      id: 8,
-      userID: 3,
-      destinationID: 7,
-      travelers: 6,
-      date: '2022/02/07',
-      duration: 4,
-      status: 'approved',
-      suggestedActivities: [],
-    }]);
-    expect(groups.upcomingGroup).to.deep.equal([{
-      id: 7,
-      userID: 3,
-      destinationID: 6,
-      travelers: 5,
-      date: '2025/5/28',
-      duration: 20,
-      status: 'approved',
-      suggestedActivities: [],
-    }]);
+    expect(groups.pastGroup).to.deep.equal([
+      {
+        id: 8,
+        userID: 3,
+        destinationID: 7,
+        travelers: 6,
+        date: '2022/02/07',
+        duration: 4,
+        status: 'approved',
+        suggestedActivities: [],
+      },
+    ]);
+    expect(groups.upcomingGroup).to.deep.equal([
+      {
+        id: 7,
+        userID: 3,
+        destinationID: 6,
+        travelers: 5,
+        date: '2025/5/28',
+        duration: 20,
+        status: 'approved',
+        suggestedActivities: [],
+      },
+    ]);
   });
 
-  it('should leave arrays empty if their are no trips in that group', () => {
+  it('should return an object of arrays empty if there are no trips in that group', () => {
     userID = 5;
     userTrips = getUserTrips(data.trips, userID);
 
@@ -142,7 +150,65 @@ describe('sortTripGroups', () => {
     expect(groups).to.deep.equal({
       pastGroup: [],
       pendingGroup: [],
-      upcomingGroup: []
-    })
-  })
+      upcomingGroup: [],
+    });
+  });
 });
+
+describe('getUserDestinations', () => {
+  let userID;
+  let userTrips;
+
+  beforeEach(() => {
+    userID = 1;
+    userTrips = getUserTrips(data.trips, userID);
+  });
+
+  it('should return an array of only destinations the user has visited or will visit', () => {
+    const userDestinations = getUserDestinations(data.destinations, userTrips);
+
+    expect(userDestinations).to.deep.equal([
+      {
+        id: 1,
+        destination: 'Lima, Peru',
+        estimatedLodgingCostPerDay: 70,
+        estimatedFlightCostPerPerson: 400,
+        image:
+          'https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80',
+        alt: 'overview of city buildings with a clear sky',
+      },
+      {
+        id: 2,
+        destination: 'Stockholm, Sweden',
+        estimatedLodgingCostPerDay: 100,
+        estimatedFlightCostPerPerson: 780,
+        image:
+          'https://images.unsplash.com/photo-1560089168-6516081f5bf1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+        alt: 'city with boats on the water during the day time',
+      },
+      {
+        id: 3,
+        destination: 'Sydney, Austrailia',
+        estimatedLodgingCostPerDay: 130,
+        estimatedFlightCostPerPerson: 950,
+        image:
+          'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+        alt: 'opera house and city buildings on the water with boats',
+      },
+    ]);
+
+    it('should return an empty array there are no trips', () => {
+      userID = 5;
+      userTrips = getUserTrips(data.trips, userID);
+
+      const userDestinations = getUserDestinations(
+        data.destinations,
+        userTrips,
+      );
+
+      expect(userDestinations).to.deep.equal([]);
+    });
+  });
+});
+
+describe('getCostForYear', () => {});
