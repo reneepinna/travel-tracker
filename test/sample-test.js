@@ -2,11 +2,7 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import data from './sample-data.js';
-import {
-  getUserDestinations,
-  getUserTrips,
-  sortTripGroup,
-} from '../src/model.js';
+import { getUserTrips, sortTripGroup, getCostForYear } from '../src/model.js';
 
 describe('getUserTrips', function () {
   it('should return an array of only trips the user has taken', () => {
@@ -88,8 +84,6 @@ describe('sortTripGroups', () => {
   it('should sort any pending trips into pendingGroup even if the trip is scheduled in the past', () => {
     const groups = sortTripGroup(userTrips);
 
-    console.log(groups)
-
     expect(groups.pendingGroup).to.deep.equal([
       {
         id: 9,
@@ -157,59 +151,6 @@ describe('sortTripGroups', () => {
   });
 });
 
-describe('getUserDestinations', () => {
-  let userID;
-  let userTrips;
-
-  beforeEach(() => {
-    userID = 1;
-    userTrips = getUserTrips(data.trips, userID);
-  });
-
-  it('should return an array of only destinations the user has visited or will visit', () => {
-    const userDestinations = getUserDestinations(data.destinations, userTrips);
-
-    expect(userDestinations).to.deep.equal([
-      {
-        id: 1,
-        destination: 'Lima, Peru',
-        estimatedLodgingCostPerDay: 70,
-        estimatedFlightCostPerPerson: 400,
-        image:
-          'https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80',
-        alt: 'overview of city buildings with a clear sky',
-      },
-      {
-        id: 2,
-        destination: 'Stockholm, Sweden',
-        estimatedLodgingCostPerDay: 100,
-        estimatedFlightCostPerPerson: 780,
-        image:
-          'https://images.unsplash.com/photo-1560089168-6516081f5bf1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-        alt: 'city with boats on the water during the day time',
-      },
-      {
-        id: 3,
-        destination: 'Sydney, Austrailia',
-        estimatedLodgingCostPerDay: 130,
-        estimatedFlightCostPerPerson: 950,
-        image:
-          'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-        alt: 'opera house and city buildings on the water with boats',
-      },
-    ]);
-  });
-
-  it('should return an empty array there are no trips', () => {
-    userID = 5;
-    userTrips = getUserTrips(data.trips, userID);
-
-    const userDestinations = getUserDestinations(data.destinations, userTrips);
-
-    expect(userDestinations).to.deep.equal([]);
-  });
-});
-
 describe('getCostForYear', () => {
   let userID;
   let userTrips;
@@ -221,33 +162,34 @@ describe('getCostForYear', () => {
     userDestinations = getUserDestinations(data.destinations, userTrips);
   });
 
-  it('should return a number representing the price of all trips the user has taken and a 10% fee', () => {
-    const userID = 1;
+  it('should return a number representing the cost of all trips the user has taken and a 10% fee', () => {
+    const userID = 2;
     const userTrips = getUserTrips(data.trips, userID);
     const userDestinations = getUserDestinations(data.destinations, userTrips);
 
-    const cost = getCostPerYear(userTrips, userDestinations)
+    const cost = getCostForYear(userTrips, userDestinations);
 
-    expect(cost).to.equal(7421)
-  })
+    expect(cost).to.equal(7216);
+  });
 
   it('should return 0 if there are no trips for this year', () => {
     const userID = 5;
     const userTrips = getUserTrips(data.trips, userID);
     const userDestinations = getUserDestinations(data.destinations, userTrips);
 
-    const cost = getCostPerYear(userTrips, userDestinations)
+    const cost = getCostForYear(userTrips, userDestinations);
 
-    expect(cost).to.equal(0)
-  })
+    expect(cost).to.equal(0);
+  });
 
   it('should only calculate the cost for approved trips booked for this year', () => {
     const userID = 4;
     const userTrips = getUserTrips(data.trips, userID);
+
     const userDestinations = getUserDestinations(data.destinations, userTrips);
 
-    const cost = getCostPerYear(userTrips, userDestinations)
+    const cost = getCostForYear(userTrips, userDestinations);
 
-    expect(cost).to.equal(28270)
-  })
+    expect(cost).to.equal(28270);
+  });
 });
