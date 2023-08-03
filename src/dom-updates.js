@@ -3,6 +3,7 @@ const dayjs = require('dayjs');
 const userGreet = document.getElementById('userGreet');
 const emptyMsgs = [...document.querySelectorAll('.trips-board__empty')];
 const boardGroups = [...document.querySelectorAll('.trips-board__group__list')];
+const costThisYearBox = document.getElementById('costThisYear')
 
 export function displayUserData(user) {
   userGreet.innerText = `Welcome ${user.name.split(' ')[0]}`;
@@ -15,7 +16,7 @@ export function displayUserTrips(tripGroups, destinations) {
   const groupNames = Object.keys(tripGroups);
 
   groupNames.forEach(groupName => {
-    if (!tripGroups[groupName].length !== 0) {
+    if (tripGroups[groupName].length !== 0) {
       renderTripCards(groupName, tripGroups[groupName], destinations);
     }
   });
@@ -46,4 +47,8 @@ function renderTripCards(groupName, trips, destinations) {
       <div>
     </article>`;
   });
+}
+
+export function displayCostThisYear(costThisYear) {
+  costThisYearBox.innerText = `$${costThisYear}.00`
 }
