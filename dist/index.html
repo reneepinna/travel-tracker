@@ -4,38 +4,60 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Travel Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <title>Travelr</title>
   </head>
   <body>
     <aside class="control-bar">
-      <h1>Travel Tracker</h1>
-      <p id="userGreet"></p>
+      <h1>Travelr</h1>
       <p id="costThisYear"></p>
       <nav>
-        <button>Home</button>
-        <button>Make Reservations</button>
+        <button class="control-bar__btn">Home</button>
+        <button class="control-bar__btn">Account</button>
+        <button class="control-bar__btn">Settings</button>
       </nav>
     </aside>
     <main>
+      <div class="welcome-bar">
+        <p id="userGreet"></p>
+        <button class="welcome-bar__btn book-btn">Book</button>
+      </div>
       <section class="trips-board">
-        <article class="trips-board__group upcoming">
-          <h3 id="upcoming" class="trips-board__header">Upcoming</h3>
-          <section id="upcomingGroup" class="trips-board__group__list"></section>
-          <p id="upcomingGroupMsg" class="trips-board__empty">Nothing here yet!</p>
+        <div class="trips-board__tab-bar">
+          <button id="upcoming" class="trips-board__tab active">
+            Upcoming
+          </button>
+          <button id="pending" class="trips-board__tab">
+            Pending<span class="trips-board__tab__num"></span>
+          </button>
+          <button id="past" class="trips-board__tab">Past</button>
+        </div>
+        <article id="upcomingGroup" class="trips-board__group">
+          <section
+            id="upcomingGroup"
+            class="trips-board__group--list"
+          ></section>
+          <p id="upcomingGroupMsg" class="trips-board__empty">
+            Nothing here yet!
+          </p>
         </article>
-        <article class="trips-board__group pending">
-          <h3 id="pending" class="trips-board__header">Pending</h3>
-          <section id="pendingGroup" class="trips-board__group__list"></section>
-          <p id="pendingGroupMsg" class="trips-board__empty">Nothing here yet!</p>
+        <article id="pendingGroup" class="trips-board__group hidden">
+          <section id="pendingGroup" class="trips-board__group--list"></section>
+          <p id="pendingGroupMsg" class="trips-board__empty">
+            Nothing here yet!
+          </p>
         </article>
-        <article class="trips-board__group past">
-          <h3 id="past" class="trips-board__header">Past</h3>
-          <section id="pastGroup" class="trips-board__group__list"></section>
+        <article id="pastGroup" class="trips-board__group hidden">
+          <section id="pastGroup" class="trips-board__group--list"></section>
           <p id="pastGroupMsg" class="trips-board__empty">Nothing here yet!</p>
         </article>
       </section>
     </main>
-    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
     <script src="bundle.js"></script>
   </body>
 </html>
