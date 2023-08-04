@@ -26,7 +26,12 @@ export function setApiData(
     }),
     headers: {
       'Content-Type': 'application/json',
-    }
+    },
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error('oops something went wrong')
+    } 
+    return response.json();
   })
-  .then(response => console.log(response.json()))
+  .catch(error => console.log(error))
 }
