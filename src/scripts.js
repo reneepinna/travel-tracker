@@ -28,7 +28,7 @@ let store;
 
 window.addEventListener('load', () => {
   store = initializeStore();
-  initializeData(44);
+  initializeData(23);
 });
 
 function initializeData(userID) {
