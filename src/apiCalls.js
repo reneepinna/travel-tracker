@@ -4,34 +4,19 @@ export function getApiData(url, key) {
     .then(data => data[key] || data);
 }
 
-export function setApiData(
-  id,
-  userID,
-  destinationID,
-  travelers,
-  date,
-  duration,
-) {
+export function setApiData(body) {
   return fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
-    body: JSON.stringify({
-      id,
-      userID,
-      destinationID,
-      travelers,
-      date,
-      duration,
-      status: 'pending',
-      suggestedAvtivities: [],
-    }),
+    body: JSON.stringify(body),
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then(response => {
-    if (!response.ok) {
-      throw new Error('oops something went wrong')
-    } 
-    return response.json();
   })
-  .catch(error => console.log(error))
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('oops something went wrong');
+      }
+      return response.json();
+    })
+    .catch(error => console.log(error));
 }

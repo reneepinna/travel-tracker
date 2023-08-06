@@ -58,5 +58,5 @@ export function sortTripGroup(trips) {
 }
 
 export function getNewId(trips) {
-  return trips.sort((a, b) => b.id - a.id)[0];
+  return trips.sort((a, b) => b.id - a.id)[0].id + 1;
 }

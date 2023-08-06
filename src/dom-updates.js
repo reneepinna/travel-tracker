@@ -1,3 +1,7 @@
+import { setApiData } from './apiCalls';
+import { getNewId } from './model';
+import {store} from './scripts'
+
 const dayjs = require('dayjs');
 
 const userGreet = document.getElementById('userGreet');
@@ -16,6 +20,9 @@ const tabs = document.querySelectorAll('.trips-board__tab');
 const destinationBoardGroup = document.querySelector(
   '.destination-board__group',
 );
+
+const form = document.querySelector('.destination-form');
+const submitBtn = document.getElementById('submitButton')
 
 export function displayUserData(user) {
   userGreet.innerText = `Welcome ${user.name.split(' ')[0]}`;
@@ -133,27 +140,30 @@ tabBar.addEventListener('click', e => {
 
 nav.addEventListener('click', e => {
   if (e.target.className.includes('control-bar__btn')) {
-    changeBoardView(e);
+    changeBoardView(e.target.id);
   }
 });
 
 export function initializeForm(destinations) {
-  const today = dayjs().format('MM/DD/YYYY');
+  const today = dayjs().format('YYYY-MM-DD');
 
-  document.getElementById('startDate').setAttribute('max', today);
-  document.getElementById('endDate').setAttribute('max', today);
-  
-  
-  const select = document.getElementById('destination-select')
+  document.getElementById('startDate').setAttribute('min', today);
+  document.getElementById('endDate').setAttribute('min', today);
+
+  const select = document.getElementById('destination-select');
   destinations.forEach(destination => {
-    select.options[select.options.length] = new Option(destination.destination, destination.id)
-  })
-  
+    select.options[select.options.length] = new Option(
+      destination.destination,
+      destination.id,
+    );
+  });
 }
 
-export function changeBoardView(e) {
+export function changeBoardView(boardName) {
+
   boards.forEach(board => {
-    if (e.target.id.includes(board.id)) {
+    if (boardName.includes(board.id)) {
+      console.log(board)
       board.classList.remove('hidden');
     } else {
       board.classList.add('hidden');
@@ -164,12 +174,54 @@ export function changeBoardView(e) {
 destinationBoardGroup.addEventListener('click', e => {
   if (e.target.className === 'tripCard__btn') {
     const destID = e.target.id.split('-')[1];
-    console.log(destID);
+    openForm(destID);
   }
 });
 
 export function openForm(destID) {
-  const options = [...document.querySelectorAll('option')]
-  const destinationOption = options.find(option => option.value === `${destID}`)
-  destinationOption.setAttribute('selected', true)
+  destinationBoardGroup.classList.add('hidden');
+  form.classList.remove('hidden');
+  window.scrollTo(0, 0);
+
+  const options = [...document.querySelectorAll('option')];
+
+  const destinationOption = options.find(
+    option => option.value === `${destID}`,
+  );
+  destinationOption.setAttribute('selected', true);
+}
+
+function closeForm() {
+  form.classList.add('hidden')
+  destinationBoardGroup.classList.remove('hidden');
+  form.reset()
+}
+
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  console.log(form)
+  form.reportValidity()
+  setApiData(formatFormData)
+  closeForm()
+  changeBoardView('trips-board')
+})
+
+function formatFormData() {
+  const formData = new FormData(form)
+
+  const startDate = dayjs(formData.get('startDate'), 'YYYY-MM-DD')
+  const endDate = dayjs(formData.get('endDate'), 'YYYY-MM-DD')
+  const duration = endDate.diff(startDate, 'd')
+
+  return {
+    id: getNewId(store.getKey('trips')),
+    userID: store.getKey('user').id,
+    destinationID: parseInt(formData.get('destinationID')),
+    travelers: parseInt(formData.get('travelers')),
+    date: startDate.format('YYYY/MM/DD'),
+    duration: duration,
+    status: 'pending',
+    suggestedActivities: []
+  }
 }
