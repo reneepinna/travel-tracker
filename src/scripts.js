@@ -6,7 +6,7 @@ const dayjs = require('dayjs');
 import './images/turing-logo.png';
 import { getCostThisYear, getNewId, getUserTrips, sortTripGroup } from './model';
 import { getApiData } from './apiCalls';
-import { displayCostThisYear, displayUserData, displayUserTrips, initializeForm, renderDestinationCards } from './dom-updates';
+import { displayCostThisYear, displayUserData, displayUserTrips, initializeForm, renderDestinationCards, openForm } from './dom-updates';
 
 function initializeStore() {
   const store = {};
@@ -49,7 +49,7 @@ function initializeData(userID) {
       store.setKey('tripGroups', sortTripGroup(store.getKey('userTrips')));
       store.setKey('costThisYear', getCostThisYear(store.getKey('userTrips'), store.getKey('destinations')))
       displayDashboard();
-      displayDestination()
+      displayDestination();
     });
 }
 

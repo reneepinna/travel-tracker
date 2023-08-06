@@ -144,9 +144,9 @@ export function initializeForm(destinations) {
   document.getElementById('endDate').setAttribute('max', today);
   
   
-  document.getElementById('destination-select').innerHTML = '';
+  const select = document.getElementById('destination-select')
   destinations.forEach(destination => {
-    document.getElementById('destination-select').innerHTML += `<option value=${destination.id}>${destination.destination}<option/>`
+    select.options[select.options.length] = new Option(destination.destination, destination.id)
   })
   
 }
@@ -168,6 +168,8 @@ destinationBoardGroup.addEventListener('click', e => {
   }
 });
 
-function openForm(destID) {
-
+export function openForm(destID) {
+  const options = [...document.querySelectorAll('option')]
+  const destinationOption = options.find(option => option.value === `${destID}`)
+  destinationOption.setAttribute('selected', true)
 }
