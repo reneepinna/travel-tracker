@@ -1,9 +1,12 @@
 const dayjs = require('dayjs');
 
 const userGreet = document.getElementById('userGreet');
+const userName = document.querySelector('.profile__name')
 const emptyMsgs = [...document.querySelectorAll('.trips-board__empty')];
 const boardGroups = [...document.querySelectorAll('.trips-board__group--list')];
 const costThisYearBox = document.getElementById('costThisYear');
+const boards = document.querySelectorAll('.board');
+const nav = document.querySelector('nav')
 
 const tabBar = document.querySelector('.trips-board__tab-bar');
 const tabGroups = document.querySelectorAll('.trips-board__group');
@@ -11,6 +14,7 @@ const tabs = document.querySelectorAll('.trips-board__tab');
 
 export function displayUserData(user) {
   userGreet.innerText = `Welcome ${user.name.split(' ')[0]}`;
+  userName.innerText = user.name;
 }
 
 export function displayUserTrips(tripGroups, destinations) {
@@ -44,14 +48,14 @@ function renderTripCards(groupName, trips, destinations) {
     const date = dayjs(trip.date, 'YYYY/MM/DD');
 
     group.innerHTML += `<article id='${trip.id}' class='tripCard'>
-      <img class='tripCard__img' src=${destination.image}/>
+      <img class='tripCard__img' src=${destination.image} alt=${destination.alt}/>
       <div class='tripCard__info'>
         <p class='tripCard__location'>${destination.destination}</p>
         <p class='tripCard__date'>${date.format('MM/DD/YYYY')} - ${date
       .add(trip.duration, 'day')
       .format('MM/DD/YYYY')}</p>
         <p class='tripCard__travlers'>${formatTravlerNumber( trip.travelers)}</p>
-          <button class='tripCard__btn'>+<button>
+          
       <div>
     </article>`;
   });
@@ -73,12 +77,10 @@ export function renderTabNotification(pendingTrips) {
   if (pendingTrips.length !== 0) {
     document.querySelector('.trips-board__tab__num').innerText = pendingTrips.length;
   }
- 
-
 }
 
 export function displayCostThisYear(costThisYear) {
-  costThisYearBox.innerText = `$${costThisYear}.00`;
+  costThisYearBox.innerText = `${costThisYear}`;
 }
 
 tabBar.addEventListener('click', e => {
@@ -100,3 +102,19 @@ tabBar.addEventListener('click', e => {
     });
   }
 });
+
+nav.addEventListener('click', (e) => {
+  
+})
+
+
+export function initializeForm() {
+  const today = dayjs().format('MM/DD/YYYY')
+
+  document.getElementById('startDate').setAttribute('max', today)
+  document.getElementById('endDate').setAttribute('max', today)
+}
+
+export function changeBoardView() {
+  
+}
