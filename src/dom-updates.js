@@ -78,7 +78,7 @@ export function renderDestinationCards(destinations) {
          <p class='destCard__price'>${destination.estimatedFlightCostPerPerson}<span>/round trip</span></p>
        </div>
      </div>
-     <button class='tripCard__btn'>+</button>
+     <button id='dest-${destination.id}-btn' class='tripCard__btn'>+</button>
     <div>
   </article>`
   })
@@ -132,7 +132,6 @@ nav.addEventListener('click', (e) => {
   }
 })
 
-
 export function initializeForm() {
   const today = dayjs().format('MM/DD/YYYY')
 
@@ -149,3 +148,11 @@ export function changeBoardView(e) {
     }
   })
 }
+
+destinationBoardGroup.addEventListener('click', (e) => {
+  if (e.target.className === 'tripCard__btn') {
+   const destID = e.target.id.split('-')[1];
+   console.log(destID);
+  }
+})
+
