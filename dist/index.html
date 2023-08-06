@@ -7,27 +7,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&family=Noto+Serif:wght@700&display=swap"
       rel="stylesheet"
     />
     <title>Travelr</title>
   </head>
   <body>
     <aside class="control-bar">
-      <h1>Travelr</h1>
-      <p id="costThisYear"></p>
+      <h1 class="brand-name">Travelr</h1>
       <nav>
-        <button class="control-bar__btn">Home</button>
-        <button class="control-bar__btn">Account</button>
-        <button class="control-bar__btn">Settings</button>
+        <div>
+          <button class="control-bar__btn dashboard">Dashboard</button>
+          <button class="control-bar__btn booking">Booking</button>
+        </div>
+        <button class="control-bar__btn logOut">Log Out</button>
       </nav>
     </aside>
     <main>
       <div class="welcome-bar">
         <p id="userGreet"></p>
-        <button class="welcome-bar__btn book-btn">Book</button>
+        <!-- <button class="welcome-bar__btn book-btn">Book</button> -->
       </div>
-      <section class="trips-board">
+      <section class="trips-board board hidden dashboard">
         <div class="trips-board__tab-bar">
           <button id="upcoming" class="trips-board__tab active">
             Upcoming
@@ -57,16 +58,37 @@
           <p id="pastGroupMsg" class="trips-board__empty">Nothing here yet!</p>
         </article>
       </section>
-      <form class="destination-form">
-        <label for="numTravlers">How many travlers?</label>
-        <input type="number" id="numTravlers" max="25" min="1">
-        <label for="startDate">What is your start date?</label>
-        <input type="date" id="startDate">
-        <label for="endDate">What is your end date?</label>
-        <input type="date" id="endDate">
-      </form>
+      <!-- Destinations -->
+      <section class="destination-board board booking">
+        <div class="destination-board__bar">
+          <p class="destination-board__tab">Book with us</p>
+        </div>
+        <div class="destination-board__group">
 
+        </div>
+      </section>
+      <!-- Form -->
+      <form class="form-board board hidden form">
+        <label for="numTravlers">How many travlers?</label>
+        <input type="number" id="numTravlers" max="25" min="1" />
+        <label for="startDate">What is your start date?</label>
+        <input type="date" id="startDate" />
+        <label for="endDate">What is your end date?</label>
+        <input type="date" id="endDate" />
+        <input type="submit" id="submitButton" />
+      </form>
     </main>
+    <section class="user-section">
+      <section class="profile">
+        <img class="profile__img" />
+        <div class="profile__text-box">
+          <p class="profile__name"></p>
+          <p class="profile__passport">Passport: Approved</p>
+          <p id="costThisYear"></p>
+        </div>
+        <div class="calendar"></div>
+      </section>
+    </section>
     <script src="bundle.js"></script>
   </body>
 </html>
