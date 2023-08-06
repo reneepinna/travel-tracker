@@ -104,7 +104,9 @@ tabBar.addEventListener('click', e => {
 });
 
 nav.addEventListener('click', (e) => {
-  
+  if (e.target.className.includes('control-bar__btn')){
+    changeBoardView(e)
+  }
 })
 
 
@@ -115,6 +117,15 @@ export function initializeForm() {
   document.getElementById('endDate').setAttribute('max', today)
 }
 
-export function changeBoardView() {
+export function changeBoardView(e) {
+
+  boards.forEach(board => {
+    if (e.target.id.includes(board.id)) {
+      board.classList.remove('hidden')
+    } else {
+      board.classList.add('hidden')
+    }
+  })
+
   
 }
