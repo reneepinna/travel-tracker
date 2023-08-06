@@ -7,7 +7,7 @@ const boardGroups = [...document.querySelectorAll('.trips-board__group--list')];
 const costThisYearBox = document.getElementById('costThisYear');
 const boards = document.querySelectorAll('.board');
 const nav = document.querySelector('nav')
-
+const destinationBoardGroup = document.querySelector('.destination-board__group')
 const tabBar = document.querySelector('.trips-board__tab-bar');
 const tabGroups = document.querySelectorAll('.trips-board__group');
 const tabs = document.querySelectorAll('.trips-board__tab');
@@ -47,7 +47,7 @@ function renderTripCards(groupName, trips, destinations) {
 
     const date = dayjs(trip.date, 'YYYY/MM/DD');
 
-    group.innerHTML += `<article id='${trip.id}' class='tripCard'>
+    group.innerHTML += `<article id='trip-${trip.id}' class='tripCard'>
       <img class='tripCard__img' src=${destination.image} alt=${destination.alt}/>
       <div class='tripCard__info'>
         <p class='tripCard__location'>${destination.destination}</p>
@@ -55,10 +55,33 @@ function renderTripCards(groupName, trips, destinations) {
       .add(trip.duration, 'day')
       .format('MM/DD/YYYY')}</p>
         <p class='tripCard__travlers'>${formatTravlerNumber( trip.travelers)}</p>
-          
       <div>
     </article>`;
   });
+}
+
+export function renderDestinationCards(destinations) {
+
+  destinationBoardGroup.innerHTML = '';
+
+  destinations.forEach(destination => {
+    
+    destinationBoardGroup.innerHTML += `<article id='dest-${destination.id}' class='tripCard'>
+    <img class='tripCard__img' src=${destination.image} alt=${destination.alt}/>
+    <div class='tripCard__info'>
+      <p class='tripCard__location'>${destination.destination}</p>
+      <div class='destCard__info'>
+       <div class='destCard__price--block'>
+         <p class='destCard__price'>${destination.estimatedLodgingCostPerDay}<span>/night</span></p>
+       </div>
+       <div class='destCard__price--block'>
+         <p class='destCard__price'>${destination.estimatedFlightCostPerPerson}<span>/round trip</span></p>
+       </div>
+     </div>
+     <button class='tripCard__btn'>+</button>
+    <div>
+  </article>`
+  })
 }
 
 function formatTravlerNumber(num) {
@@ -118,7 +141,6 @@ export function initializeForm() {
 }
 
 export function changeBoardView(e) {
-
   boards.forEach(board => {
     if (e.target.id.includes(board.id)) {
       board.classList.remove('hidden')
@@ -126,6 +148,4 @@ export function changeBoardView(e) {
       board.classList.add('hidden')
     }
   })
-
-  
 }

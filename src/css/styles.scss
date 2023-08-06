@@ -122,6 +122,7 @@ main {
   text-align: center;
 }
 
+.destination-board__group,
 .trips-board__group--list {
   padding: $standardPadding;
   display: grid;
@@ -165,7 +166,6 @@ main {
 .tripCard {
   text-align: left;
   background-color: #fff;
-  max-width: 35rem;
   padding: 1rem;
   border-radius: 2rem;
   display: flex;
@@ -175,11 +175,11 @@ main {
 .tripCard__img {
   object-fit: fill;
   height: 10rem;
-  width: 10rem;
+  width: 13rem;
   object-fit: cover;
   object-position: center;
   border-radius: 2rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 .tripCard__info {
@@ -222,24 +222,7 @@ main {
   }
 }
 
-
-
-
 // Destination Card
-
-.destCard {
-  background-color: white;
-  max-width: 20rem;
-  padding: 1rem;
-  border-radius: 2rem;
-  position: relative;
-  
-}
-
-.destCard__img {
-  width: 100%;
-  border-radius: 2rem;
-}
 
 .destCard__price {
   display: inline-block;
@@ -251,16 +234,6 @@ main {
     font-size: 1.4rem;
     color: grey;
   }
-}
-
-.destCard__button {
-  background-color: #34a0a4;
-  color: white;
-  padding: 0.6rem;
-  border-radius: 100rem;
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
 }
 
 .hidden {
