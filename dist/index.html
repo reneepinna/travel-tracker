@@ -17,8 +17,12 @@
       <h1 class="brand-name">Travelr</h1>
       <nav>
         <div>
-          <button id="trips-board__btn" class="control-bar__btn">Dashboard</button>
-          <button id="destination-board__btn" class="control-bar__btn booking">Booking</button>
+          <button id="trips-board__btn" class="control-bar__btn">
+            Dashboard
+          </button>
+          <button id="destination-board__btn" class="control-bar__btn booking">
+            Booking
+          </button>
         </div>
         <button id="log-out__btn" class="log-out__btn">Log Out</button>
       </nav>
@@ -59,22 +63,26 @@
         </article>
       </section>
       <!-- Destinations -->
-      <section id="destination-board" class="destination-board board booking">
+      <section
+        id="destination-board"
+        class="destination-board board booking hidden"
+      >
         <div class="destination-board__bar">
           <p class="destination-board__tab">Book with us</p>
         </div>
-        <div class="destination-board__group">
-        </div>
+        <div class="destination-board__group"></div>
       </section>
       <!-- Form -->
-      <form class="destination-form hidden form">
+      <form class="destination-form form">
+        <label for="destination-select">Where to</label>
+        <select name="destination-select" id="destination-select"></select>
         <label for="numTravlers">How many travlers?</label>
-        <input type="number" id="numTravlers" max="25" min="1" />
+        <input type="number" id="numTravlers" max="25" min="1"/>
         <label for="startDate">What is your start date?</label>
-        <input type="date" id="startDate" />
+        <input type="date" id="startDate"/>
         <label for="endDate">What is your end date?</label>
-        <input type="date" id="endDate" />
-        <input type="submit" id="submitButton" />
+        <input type="date" id="endDate"/>
+        <input type="submit" id="submitButton"/>
       </form>
     </main>
     <section class="user-section">
