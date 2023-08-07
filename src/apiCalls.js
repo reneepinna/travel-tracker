@@ -1,7 +1,8 @@
 import { store , displayDashboard} from "./scripts";
 import { getUserTrips, sortTripGroup } from "./model";
 
-const getErrorBox = document.querySelector('get-error')
+const getErrorBox = document.querySelector('.get-error')
+const formErrorBox = document.querySelector('.form-error')
 
 export function getApiData(url, key) {
   return fetch(url)
@@ -25,12 +26,12 @@ export function setApiData(body) {
   })
     .then(response => {
       if (!response.ok) {
-        throw new Error(`${response.status}: ${response.statusText}`);
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
       return response.json();
     })
     .then(resp => updateTrips())
-    .catch(error => console.log(error));
+    .catch(error => formErrorBox.innerText = error);
 }
 
 export function updateTrips() {
