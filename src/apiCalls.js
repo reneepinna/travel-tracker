@@ -39,8 +39,6 @@ export function updateTrips() {
     .then(trips => {
       store.setKey('trips', trips);
       store.setKey('userTrips', getUserTrips(trips, store.getKey('user').id));
-    })
-    .then(emp => {
       store.setKey('tripGroups', sortTripGroup(store.getKey('userTrips')));
       displayDashboard();
     });
