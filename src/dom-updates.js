@@ -24,7 +24,8 @@ const destinationBoardGroup = document.querySelector(
 
 const form = document.querySelector('.destination-form');
 const formWrapper = document.querySelector('.form-wrapper');
-const closeFormBtn = document.querySelector('.close-form-btn')
+const closeFormBtn = document.querySelector('.close-form-btn');
+const formErrorBox = document.querySelector('.form-error');
 
 export function displayUserData(user) {
   userGreet.innerText = `Welcome ${user.name.split(' ')[0]}`;
@@ -169,6 +170,7 @@ function closeForm() {
   formWrapper.classList.add('hidden');
   destinationBoardGroup.classList.remove('hidden');
   form.reset();
+  formErrorBox.innerText = ''
 }
 
 function formatFormData() {
@@ -188,6 +190,13 @@ function formatFormData() {
     status: 'pending',
     suggestedActivities: [],
   };
+}
+
+function validateTripDate(body) {
+  if (body.duration <= 0) {
+    formErrorBox.innerText = `Your trip's end date must be after your trip's start date.`
+  }
+  
 }
 
 //Event Listeners
@@ -214,13 +223,15 @@ destinationBoardGroup.addEventListener('click', e => {
 form.addEventListener('submit', e => {
   e.preventDefault();
   form.reportValidity();
-  setApiData(formatFormData());
-
-  closeForm();
-  changeBoardView('trips-board');
-  changeTabVeiw('pending');
+  
+  if (validateTripDate(formatFormData())){
+    setApiData(formatFormData());
+    closeForm();
+    changeBoardView('trips-board');
+    changeTabVeiw('pending');
+  }
 });
 
 closeFormBtn.addEventListener('click', () => {
-  closeForm()
-})
+  closeForm();
+});
