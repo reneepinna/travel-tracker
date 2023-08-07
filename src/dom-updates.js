@@ -13,7 +13,7 @@ const nav = document.querySelector('nav');
 const boards = document.querySelectorAll('.board');
 
 const emptyMsgs = [...document.querySelectorAll('.trips-board__empty')];
-const boardGroups = [...document.querySelectorAll('.trips-board__group--list')];
+const tripBoardGroups = [...document.querySelectorAll('.trips-board__group--list')];
 const tabBar = document.querySelector('.trips-board__tab-bar');
 const tabGroups = document.querySelectorAll('.trips-board__group');
 const tabs = document.querySelectorAll('.trips-board__tab');
@@ -33,7 +33,7 @@ export function displayUserData(user) {
 }
 
 export function displayUserTrips(tripGroups, destinations) {
-  boardGroups.forEach(group => (group.innerHTML = ''));
+  tripBoardGroups.forEach(group => (group.innerHTML = ''));
   emptyMsgs.forEach(msg => msg.classList.remove('hidden'));
 
   const groupNames = Object.keys(tripGroups);
@@ -47,7 +47,7 @@ export function displayUserTrips(tripGroups, destinations) {
 
 function renderTripCards(groupName, trips, destinations) {
   const emptyMsg = emptyMsgs.find(msg => msg.id === `${groupName}Msg`);
-  const group = boardGroups.find(group => group.id === groupName);
+  const group = tripBoardGroups.find(group => group.id === groupName);
 
   emptyMsg.classList.add('hidden');
 
@@ -144,8 +144,12 @@ export function initializeForm(destinations) {
 }
 
 export function changeBoardView(boardName) {
+
+  
+
   boards.forEach(board => {
     if (boardName.includes(board.id)) {
+      console.log(boardName, board.id)
       board.classList.remove('hidden');
     } else {
       board.classList.add('hidden');
@@ -153,9 +157,7 @@ export function changeBoardView(boardName) {
   });
 }
 
-export function openForm(destID) {
-  destinationBoardGroup.classList.add('hidden');
-  formWrapper.classList.remove('hidden');
+export function prepareFormByDest(destID) {
   window.scrollTo(0, 0);
 
   const options = [...document.querySelectorAll('option')];
@@ -166,9 +168,7 @@ export function openForm(destID) {
   destinationOption.setAttribute('selected', true);
 }
 
-function closeForm() {
-  formWrapper.classList.add('hidden');
-  destinationBoardGroup.classList.remove('hidden');
+function resetForm() {
   form.reset();
   formErrorBox.innerText = '';
 }
@@ -196,6 +196,7 @@ function validateTripDate(body) {
   if (body.duration <= 0) {
     formErrorBox.innerText = `Your trip's end date must be after your trip's start date.`;
   }
+  return true;
 }
 
 //Event Listeners
@@ -215,7 +216,8 @@ nav.addEventListener('click', e => {
 destinationBoardGroup.addEventListener('click', e => {
   if (e.target.className === 'tripCard__btn') {
     const destID = e.target.id.split('-')[1];
-    openForm(destID);
+    prepareFormByDest(destID);
+    changeBoardView('form-board');
   }
 });
 
@@ -225,12 +227,13 @@ form.addEventListener('submit', e => {
 
   if (validateTripDate(formatFormData())) {
     setApiData(formatFormData());
-    closeForm();
+    resetForm();
     changeBoardView('trips-board');
     changeTabVeiw('pending');
   }
 });
 
 closeFormBtn.addEventListener('click', () => {
-  closeForm();
+  resetForm();
+  changeBoardView('destination-board');
 });
