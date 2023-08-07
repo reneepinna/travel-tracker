@@ -3,7 +3,7 @@ $accentColor: #34a0a4;
 $lightAccentColor: lighten($accentColor, 40%);
 $lightColor: #f1f2f6;
 $backing: #fff;
-$mainContentBacking:#f0f0f0;
+$mainContentBacking: #f0f0f0;
 $standardPadding: 2.5rem;
 
 *,
@@ -43,7 +43,6 @@ main {
 
 .control-bar {
   background-color: $backing;
-  // border: #34a0a4 solid 2px;
   min-height: 100rem;
   width: 13%;
   border-radius: 1.5rem;
@@ -69,7 +68,6 @@ main {
     background-color: $accentColor;
   }
 }
-
 
 // User Section
 
@@ -112,7 +110,6 @@ main {
   border-radius: 1.5rem;
   padding: 1rem;
   width: 100%;
-  
 }
 
 .destination-board__group,
@@ -127,8 +124,7 @@ main {
   padding: $standardPadding;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: $standardPadding
-
+  gap: $standardPadding;
 }
 
 .trips-board__tab-bar {
@@ -143,23 +139,10 @@ main {
   min-height: 3rem;
   border-radius: 1.5rem 1.5rem 0 0;
 
-
   &.active {
     background-color: $lightAccentColor;
   }
 }
-
-// .trips-board__tab__num {
- 
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // margin: 0 1rem;
-  // background-color: #faa307;
-  // height: 2rem;
-  // width: 2rem;
-  // border-radius: 1000rem;
-// }
 
 // Trip Card
 
@@ -169,7 +152,7 @@ main {
   padding: 1rem;
   border-radius: 2rem;
   display: flex;
-  box-shadow: 0 0 .8rem .2rem rgba(0, 0, 0, .2);
+  box-shadow: 0 0 0.8rem 0.2rem rgba(0, 0, 0, 0.2);
 }
 
 .tripCard__img {
@@ -185,6 +168,9 @@ main {
 .tripCard__info {
   position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
   .tripCard__location {
     font-weight: 900;
@@ -215,20 +201,24 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-  
+
     &:hover {
       width: auto;
     }
   }
-}
 
 // Destination Card
+
+.destCard__price--block {
+  margin-top: 4.5rem;
+}
 
 .destCard__price {
   display: inline-block;
   border-radius: 100rem;
   background-color: #f1f2f6;
   padding: 0.6rem;
+  margin-right: .5rem;
 
   span {
     font-size: 1.4rem;

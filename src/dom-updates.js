@@ -78,11 +78,11 @@ export function renderDestinationCards(destinations) {
     <img class='tripCard__img' src=${destination.image} alt=${destination.alt}/>
     <div class='tripCard__info'>
       <p class='tripCard__location'>${destination.destination}</p>
-      <div class='destCard__info'>
+      <div class='tripCard__info'>
        <div class='destCard__price--block'>
          <p class='destCard__price'>${destination.estimatedLodgingCostPerDay}<span>/night</span></p>
-       </div>
-       <div class='destCard__price--block'>
+
+
          <p class='destCard__price'>${destination.estimatedFlightCostPerPerson}<span>/round trip</span></p>
        </div>
      </div>
