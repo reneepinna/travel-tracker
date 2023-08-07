@@ -55,14 +55,14 @@ function initializeData(userID) {
     });
 }
 
-function displayDashboard() {
+export function displayDashboard() {
   displayCostThisYear(store.getKey('costThisYear'))
   displayUserData(store.getKey('user'));
   displayUserTrips(store.getKey('tripGroups'), store.getKey('destinations'));
   getNewId(store.getKey('trips'))
 }
 
-function displayDestination() {
+export function displayDestination() {
   renderDestinationCards(store.getKey('destinations'))
   initializeForm(store.getKey('destinations'))
 }

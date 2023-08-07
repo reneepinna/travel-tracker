@@ -1,9 +1,10 @@
 import { setApiData } from './apiCalls';
 import { getNewId } from './model';
-import {store} from './scripts'
+import { store } from './scripts';
 
 const dayjs = require('dayjs');
 
+//Query Selectors
 const userGreet = document.getElementById('userGreet');
 const userName = document.querySelector('.profile__name');
 const costThisYearBox = document.getElementById('costThisYear');
@@ -22,7 +23,6 @@ const destinationBoardGroup = document.querySelector(
 );
 
 const form = document.querySelector('.destination-form');
-const submitBtn = document.getElementById('submitButton')
 
 export function displayUserData(user) {
   userGreet.innerText = `Welcome ${user.name.split(' ')[0]}`;
@@ -38,10 +38,6 @@ export function displayUserTrips(tripGroups, destinations) {
   groupNames.forEach(groupName => {
     if (tripGroups[groupName].length !== 0) {
       renderTripCards(groupName, tripGroups[groupName], destinations);
-    }
-
-    if (groupName === 'pendingGroup') {
-      renderTabNotification(tripGroups[groupName]);
     }
   });
 }
@@ -107,42 +103,27 @@ function formatTravlerNumber(num) {
   }
 }
 
-export function renderTabNotification(pendingTrips) {
-  if (pendingTrips.length !== 0) {
-    document.querySelector('.trips-board__tab__num').innerText =
-      pendingTrips.length;
-  }
-}
-
 export function displayCostThisYear(costThisYear) {
   costThisYearBox.innerText = `${costThisYear}`;
 }
 
-tabBar.addEventListener('click', e => {
-  if (e.target.className === 'trips-board__tab') {
-    tabs.forEach(tab => {
-      if (tab.id === `${e.target.id}`) {
-        tab.classList.add('active');
-      } else {
-        tab.classList.remove('active');
-      }
-    });
+export function changeTabVeiw(tabID) {
+  tabs.forEach(tab => {
+    if (tab.id === tabID) {
+      tab.classList.add('active');
+    } else {
+      tab.classList.remove('active');
+    }
+  });
 
-    tabGroups.forEach(tabGroup => {
-      if (tabGroup.id === `${e.target.id}Group`) {
-        tabGroup.classList.remove('hidden');
-      } else {
-        tabGroup.classList.add('hidden');
-      }
-    });
-  }
-});
-
-nav.addEventListener('click', e => {
-  if (e.target.className.includes('control-bar__btn')) {
-    changeBoardView(e.target.id);
-  }
-});
+  tabGroups.forEach(tabGroup => {
+    if (tabGroup.id === `${tabID}Group`) {
+      tabGroup.classList.remove('hidden');
+    } else {
+      tabGroup.classList.add('hidden');
+    }
+  });
+}
 
 export function initializeForm(destinations) {
   const today = dayjs().format('YYYY-MM-DD');
@@ -160,23 +141,15 @@ export function initializeForm(destinations) {
 }
 
 export function changeBoardView(boardName) {
-
   boards.forEach(board => {
     if (boardName.includes(board.id)) {
-      console.log(board)
+      console.log(board);
       board.classList.remove('hidden');
     } else {
       board.classList.add('hidden');
     }
   });
 }
-
-destinationBoardGroup.addEventListener('click', e => {
-  if (e.target.className === 'tripCard__btn') {
-    const destID = e.target.id.split('-')[1];
-    openForm(destID);
-  }
-});
 
 export function openForm(destID) {
   destinationBoardGroup.classList.add('hidden');
@@ -192,27 +165,17 @@ export function openForm(destID) {
 }
 
 function closeForm() {
-  form.classList.add('hidden')
+  form.classList.add('hidden');
   destinationBoardGroup.classList.remove('hidden');
-  form.reset()
+  form.reset();
 }
 
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault()
-  console.log(form)
-  form.reportValidity()
-  setApiData(formatFormData)
-  closeForm()
-  changeBoardView('trips-board')
-})
-
 function formatFormData() {
-  const formData = new FormData(form)
+  const formData = new FormData(form);
 
-  const startDate = dayjs(formData.get('startDate'), 'YYYY-MM-DD')
-  const endDate = dayjs(formData.get('endDate'), 'YYYY-MM-DD')
-  const duration = endDate.diff(startDate, 'd')
+  const startDate = dayjs(formData.get('startDate'), 'YYYY-MM-DD');
+  const endDate = dayjs(formData.get('endDate'), 'YYYY-MM-DD');
+  const duration = endDate.diff(startDate, 'd');
 
   return {
     id: getNewId(store.getKey('trips')),
@@ -222,6 +185,38 @@ function formatFormData() {
     date: startDate.format('YYYY/MM/DD'),
     duration: duration,
     status: 'pending',
-    suggestedActivities: []
-  }
+    suggestedActivities: [],
+  };
 }
+
+//Event Listeners
+
+tabBar.addEventListener('click', e => {
+  if (e.target.className === 'trips-board__tab') {
+    changeTabVeiw(e.target.id);
+  }
+});
+
+nav.addEventListener('click', e => {
+  if (e.target.className.includes('control-bar__btn')) {
+    changeBoardView(e.target.id);
+  }
+});
+
+destinationBoardGroup.addEventListener('click', e => {
+  if (e.target.className === 'tripCard__btn') {
+    const destID = e.target.id.split('-')[1];
+    openForm(destID);
+  }
+});
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  console.log(form);
+  form.reportValidity();
+  setApiData(formatFormData());
+
+  closeForm();
+  changeBoardView('trips-board');
+  changeTabVeiw('pending');
+});
