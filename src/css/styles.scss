@@ -6,7 +6,7 @@ $backing: #fff;
 $mainContentBacking: #f0f0f0;
 $standardPadding: 2.5rem;
 $buttonColor: #faa307;
-
+$standardShadow: 0 0 0.8rem 0.2rem rgba(0, 0, 0, 0.2);
 
 // Global Rules
 
@@ -88,24 +88,9 @@ main {
   #userGreet {
     font-size: 2rem;
   }
-
 }
 
-// Main - DashBoard Content
-
-
-
-
-
-// User Section
-
-.user-section {
-  width: 22%;
-  border: 2px solid #34a0a4;
-}
-
-.destination-board,
-.trips-board {
+.board {
   background-color: $accentColor;
   margin: 2rem 0;
   border-radius: 1.5rem;
@@ -113,19 +98,34 @@ main {
   width: 100%;
 }
 
-.destination-board__group,
-.trips-board__group {
+@mixin groupBacking {
   background-color: $lightAccentColor;
   min-height: 57rem;
   text-align: center;
 }
 
-.destination-board__group,
-.trips-board__group--list {
+@mixin cardGrid {
   padding: $standardPadding;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: $standardPadding;
+}
+
+@mixin tabShape {
+  padding: 1rem;
+  border: 0;
+  border-radius: 1.5rem 1.5rem 0 0;
+  min-height: 3rem;
+}
+
+// Main - DashBoard Content
+
+.trips-board__group {
+  @include groupBacking;
+
+  .trips-board__group--list {
+    @include cardGrid;
+  }
 }
 
 .trips-board__tab-bar {
@@ -133,16 +133,26 @@ main {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.destination-board__tab,
 .trips-board__tab {
-  padding: 1rem;
-  border: 0;
-  min-height: 3rem;
-  border-radius: 1.5rem 1.5rem 0 0;
+  @include tabShape;
 
   &.active {
     background-color: $lightAccentColor;
   }
+}
+
+// Main - Booking Content
+
+.destination-board__group {
+  @include groupBacking;
+  @include cardGrid;
+}
+
+.destination-board__tab {
+  @include tabShape;
+  background-color: $backing;
+  text-align: center;
+  font-size: 1.8rem;
 }
 
 // Trip Card
@@ -153,7 +163,7 @@ main {
   padding: 1rem;
   border-radius: 2rem;
   display: flex;
-  box-shadow: 0 0 0.8rem 0.2rem rgba(0, 0, 0, 0.2);
+  box-shadow: $standardShadow;
 }
 
 .tripCard__img {
@@ -227,6 +237,11 @@ main {
   }
 }
 
+.form-board__group {
+  @include groupBacking;
+  padding: 3rem;
+}
+
 .form-wrapper {
   background-color: #fff;
   min-height: 35rem;
@@ -237,8 +252,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 0 0.8rem 0.2rem rgba(0, 0, 0, 0.2);
-
+  box-shadow: $standardShadow;
+  text-align: left;
+  margin:  0 auto;
 }
 
 .destination-form {
@@ -287,6 +303,15 @@ label {
   flex-direction: column;
   width: 46%;
 }
+
+// User Section
+
+.user-section {
+  width: 22%;
+  border: 2px solid #34a0a4;
+}
+
+// Util
 
 .hidden {
   display: none;
