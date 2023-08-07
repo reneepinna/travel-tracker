@@ -13,129 +13,165 @@
     <title>Travelr</title>
   </head>
   <body>
-    <aside class="control-bar">
-      <h1 class="brand-name">Travelr</h1>
-      <nav>
-        <div>
-          <button id="trips-board__btn" class="control-bar__btn">
-            Dashboard
-          </button>
-          <button id="destination-board__btn" class="control-bar__btn booking">
-            Booking
-          </button>
-        </div>
-        <button id="log-out__btn" class="log-out__btn">Log Out</button>
-      </nav>
-    </aside>
-    <main>
-      <div class="welcome-bar">
-        <p id="userGreet"></p>
-        <p class="get-error"></p>
-      </div>
-      <section id="trips-board" class="trips-board board">
-        <div class="trips-board__tab-bar">
-          <button id="upcoming" class="trips-board__tab active">
-            Upcoming
-          </button>
-          <button id="pending" class="trips-board__tab">
-            Pending<span class="trips-board__tab__num"></span>
-          </button>
-          <button id="past" class="trips-board__tab">Past</button>
-        </div>
-        <article id="upcomingGroup" class="trips-board__group">
-          <section
-            id="upcomingGroup"
-            class="trips-board__group--list"
-          ></section>
-          <p id="upcomingGroupMsg" class="trips-board__empty">
-            Nothing here yet!
-          </p>
-        </article>
-        <article id="pendingGroup" class="trips-board__group hidden">
-          <section id="pendingGroup" class="trips-board__group--list"></section>
-          <p id="pendingGroupMsg" class="trips-board__empty">
-            Nothing here yet!
-          </p>
-        </article>
-        <article id="pastGroup" class="trips-board__group hidden">
-          <section id="pastGroup" class="trips-board__group--list"></section>
-          <p id="pastGroupMsg" class="trips-board__empty">Nothing here yet!</p>
-        </article>
-      </section>
-      <!-- Destinations -->
-      <section
-        id="destination-board"
-        class="destination-board board booking hidden"
-      >
-        <div class="destination-board__bar">
-          <p class="destination-board__tab">
-            Choose the destination of your dreams
-          </p>
-        </div>
-        <div class="destination-board__group"></div>
-      </section>
-      <!-- Form -->
-      <section id="form-board" class="form-board board hidden">
-        <div class="destination-board__bar">
-          <p class="destination-board__tab">
-            Just a few more details
-          </p>
-        </div>
-        <div class="form-board__group">
-          <div class="form-wrapper">
-            <div class="form-header">
-              <h3>Book Your Journey</h3>
-              <button class="close-form-btn">X</button>
-            </div>
-            <form class="destination-form">
-              <p class="form-error"></p>
-              <label for="destinationID">Destination</label>
-              <select
-                name="destinationID"
-                id="destination-select"
-                required
-              ></select>
-              <label for="travelers">Group size</label>
-              <input
-                type="number"
-                name="travelers"
-                id="numTravelers"
-                max="25"
-                min="1"
-                required
-              />
-              <div class="date-section">
-                <div class="date-box">
-                  <label for="startDate">Start date</label>
-                  <input type="date" name="startDate" id="startDate" required />
-                </div>
-                <div class="date-box">
-                  <label for="endDate">End date</label>
-                  <input type="date" name="endDate" id="endDate" required />
-                </div>
-              </div>
-              <input
-                type="submit"
-                value="Book"
-                id="submitButton"
-                class="submitButton"
-              />
-            </form>
+    <!-- Login page -->
+    <div class="login-page">
+      <img src="./images/paul-pastourmatzis-km74CLco7qs-unsplash.jpg" class="login-img" alt="" />
+      <article class="login-wrapper">
+        <h2 class="login-header">
+          Start Your Next
+          <span class="login-header-2">Journey</span>
+        </h2>
+        <form class="login-form">
+          <label class="login-form-label" for="username">Username</label>
+          <input class="login-form-input" type="text" id="username" name="username" />
+          <label class="login-form-label" for="password">Password</label>
+          <input
+            class="login-form-input"
+            type="password"
+            id="password"
+            name="password"
+          />
+          <input type="submit" class="login-submit submit" value="Log In">
+        </form>
+      </article>
+    </div>
+    <!-- website -->
+    <div class="website hidden">
+      <aside class="control-bar">
+        <h1 class="brand-name">Travelr</h1>
+        <nav>
+          <div>
+            <button id="trips-board__btn" class="control-bar__btn">
+              Dashboard
+            </button>
+            <button
+              id="destination-board__btn"
+              class="control-bar__btn booking"
+            >
+              Booking
+            </button>
           </div>
+          <button id="log-out__btn" class="log-out__btn">Log Out</button>
+        </nav>
+      </aside>
+      <main>
+        <div class="welcome-bar">
+          <p id="userGreet"></p>
+          <p class="get-error"></p>
         </div>
+        <section id="trips-board" class="trips-board board">
+          <div class="trips-board__tab-bar">
+            <button id="upcoming" class="trips-board__tab active">
+              Upcoming
+            </button>
+            <button id="pending" class="trips-board__tab">
+              Pending<span class="trips-board__tab__num"></span>
+            </button>
+            <button id="past" class="trips-board__tab">Past</button>
+          </div>
+          <article id="upcomingGroup" class="trips-board__group">
+            <section
+              id="upcomingGroup"
+              class="trips-board__group--list"
+            ></section>
+            <p id="upcomingGroupMsg" class="trips-board__empty">
+              Nothing here yet!
+            </p>
+          </article>
+          <article id="pendingGroup" class="trips-board__group hidden">
+            <section
+              id="pendingGroup"
+              class="trips-board__group--list"
+            ></section>
+            <p id="pendingGroupMsg" class="trips-board__empty">
+              Nothing here yet!
+            </p>
+          </article>
+          <article id="pastGroup" class="trips-board__group hidden">
+            <section id="pastGroup" class="trips-board__group--list"></section>
+            <p id="pastGroupMsg" class="trips-board__empty">
+              Nothing here yet!
+            </p>
+          </article>
+        </section>
+        <!-- Destinations -->
+        <section
+          id="destination-board"
+          class="destination-board board booking hidden"
+        >
+          <div class="destination-board__bar">
+            <p class="destination-board__tab">
+              Choose the destination of your dreams
+            </p>
+          </div>
+          <div class="destination-board__group"></div>
+        </section>
+        <!-- Form -->
+        <section id="form-board" class="form-board board hidden">
+          <div class="destination-board__bar">
+            <p class="destination-board__tab">Just a few more details</p>
+          </div>
+          <div class="form-board__group">
+            <div class="form-wrapper">
+              <div class="form-header">
+                <h3>Book Your Journey</h3>
+                <button class="close-form-btn">X</button>
+              </div>
+              <form class="destination-form">
+                <p class="form-error"></p>
+                <label for="destinationID">Destination</label>
+                <select
+                  name="destinationID"
+                  id="destination-select"
+                  required
+                ></select>
+                <label for="travelers">Group size</label>
+                <input
+                  type="number"
+                  name="travelers"
+                  id="numTravelers"
+                  max="25"
+                  min="1"
+                  required
+                />
+                <div class="date-section">
+                  <div class="date-box">
+                    <label for="startDate">Start date</label>
+                    <input
+                      type="date"
+                      name="startDate"
+                      id="startDate"
+                      required
+                    />
+                  </div>
+                  <div class="date-box">
+                    <label for="endDate">End date</label>
+                    <input type="date" name="endDate" id="endDate" required />
+                  </div>
+                </div>
+                <input
+                  type="submit"
+                  value="Book"
+                  id="submitButton"
+                  class="submitButton"
+                />
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+      <section class="user-section">
+        <section class="profile">
+          <img class="profile__img" />
+          <div class="profile__text-box">
+            <p class="profile__name"></p>
+            <p class="profile__passport">Passport: Approved</p>
+            <p id="costThisYear"></p>
+          </div>
+          <div class="calendar"></div>
+        </section>
       </section>
-    </main>
-    <section class="user-section">
-      <section class="profile">
-        <img class="profile__img" />
-        <div class="profile__text-box">
-          <p class="profile__name"></p>
-          <p class="profile__passport">Passport: Approved</p>
-          <p id="costThisYear"></p>
-        </div>
-        <div class="calendar"></div>
-      </section>
-    </section>
-    <script src="bundle.js"></script>
+      <script src="bundle.js"></script>
+    </div>
   </body>
 </html>

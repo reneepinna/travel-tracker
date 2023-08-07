@@ -1,3 +1,5 @@
+
+import './images/paul-pastourmatzis-km74CLco7qs-unsplash.jpg'
 import './css/styles.scss';
 const dayjs = require('dayjs');
 
