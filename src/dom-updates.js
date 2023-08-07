@@ -23,6 +23,8 @@ const destinationBoardGroup = document.querySelector(
 );
 
 const form = document.querySelector('.destination-form');
+const formWrapper = document.querySelector('.form-wrapper');
+const closeFormBtn = document.querySelector('.close-form-btn')
 
 export function displayUserData(user) {
   userGreet.innerText = `Welcome ${user.name.split(' ')[0]}`;
@@ -152,7 +154,7 @@ export function changeBoardView(boardName) {
 
 export function openForm(destID) {
   destinationBoardGroup.classList.add('hidden');
-  form.classList.remove('hidden');
+  formWrapper.classList.remove('hidden');
   window.scrollTo(0, 0);
 
   const options = [...document.querySelectorAll('option')];
@@ -164,7 +166,7 @@ export function openForm(destID) {
 }
 
 function closeForm() {
-  form.classList.add('hidden');
+  formWrapper.classList.add('hidden');
   destinationBoardGroup.classList.remove('hidden');
   form.reset();
 }
@@ -218,3 +220,7 @@ form.addEventListener('submit', e => {
   changeBoardView('trips-board');
   changeTabVeiw('pending');
 });
+
+closeFormBtn.addEventListener('click', () => {
+  closeForm()
+})

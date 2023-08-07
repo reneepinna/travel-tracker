@@ -73,17 +73,31 @@
         <div class="destination-board__group"></div>
       </section>
       <!-- Form -->
-      <form class="destination-form hidden">
-        <label for="destinationID">Where to</label>
-        <select name="destinationID" id="destination-select" required></select>
-        <label for="travelers">How many travlers?</label>
-        <input type="number" name="travelers" id="numTravelers" max="25" min="1" required/>
-        <label for="startDate">What is your start date?</label>
-        <input type="date" name="startDate" id="startDate" required/>
-        <label for="endDate">What is your end date?</label>
-        <input type="date" name="endDate" id="endDate" required/>
-        <input type="submit" value='Book' id="submitButton"/>
-      </form>
+      <div class="form-wrapper hidden">
+        <button class="close-form-btn">X</button>
+        <form class="destination-form">
+          <label for="destinationID">Where to</label>
+          <select
+            name="destinationID"
+            id="destination-select"
+            required
+          ></select>
+          <label for="travelers">How many travlers?</label>
+          <input
+            type="number"
+            name="travelers"
+            id="numTravelers"
+            max="25"
+            min="1"
+            required
+          />
+          <label for="startDate">What is your start date?</label>
+          <input type="date" name="startDate" id="startDate" required />
+          <label for="endDate">What is your end date?</label>
+          <input type="date" name="endDate" id="endDate" required />
+          <input type="submit" value="Book" id="submitButton" />
+        </form>
+      </div>
     </main>
     <section class="user-section">
       <section class="profile">
