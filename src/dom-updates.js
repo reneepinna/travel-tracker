@@ -143,7 +143,6 @@ export function initializeForm(destinations) {
 export function changeBoardView(boardName) {
   boards.forEach(board => {
     if (boardName.includes(board.id)) {
-      console.log(board);
       board.classList.remove('hidden');
     } else {
       board.classList.add('hidden');
@@ -212,7 +211,6 @@ destinationBoardGroup.addEventListener('click', e => {
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  console.log(form);
   form.reportValidity();
   setApiData(formatFormData());
 

@@ -1,14 +1,21 @@
 import { store , displayDashboard} from "./scripts";
 import { getUserTrips, sortTripGroup } from "./model";
 
+const getErrorBox = document.querySelector('get-error')
+
 export function getApiData(url, key) {
   return fetch(url)
-    .then(response => response.json())
-    .then(data => data[key] || data);
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Oops, something went wrong! :/')
+      }
+      return response.json()
+    })
+    .then(data => data[key] || data)
+    .catch(error => getErrorBox.innerText = error)
 }
 
 export function setApiData(body) {
-  console.log(body)
   return fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
     body: JSON.stringify(body),
@@ -17,7 +24,6 @@ export function setApiData(body) {
     },
   })
     .then(response => {
-      console.log(response)
       if (!response.ok) {
         throw new Error(`${response.status}: ${response.statusText}`);
       }
@@ -37,6 +43,4 @@ export function updateTrips() {
       store.setKey('tripGroups', sortTripGroup(store.getKey('userTrips')));
       displayDashboard();
     });
-
-    
 }

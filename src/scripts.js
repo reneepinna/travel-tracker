@@ -30,7 +30,7 @@ export let store;
 
 window.addEventListener('load', () => {
   store = initializeStore();
-  initializeData(23);
+  initializeData(16);
 });
 
 function initializeData(userID) {
