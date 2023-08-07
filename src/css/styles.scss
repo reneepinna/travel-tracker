@@ -2,6 +2,9 @@
 $accentColor: #34a0a4;
 $lightAccentColor: lighten($accentColor, 40%);
 $lightColor: #f1f2f6;
+$backing: #fff;
+$mainContentBacking: #f0f0f0;
+$standardPadding: 2.5rem;
 
 *,
 *::after,
@@ -20,51 +23,60 @@ body {
   font-family: 'Lato', sans-serif;
   display: flex;
   width: 100%;
-  background-color: $lightColor;
-  padding: 2rem;
+  background-color: $backing;
+  padding: $standardPadding;
 }
-
-// header {
-//   padding: 2rem;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   background-color: $accentColor;
-// }
 
 main {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: $standardPadding;
+  background-color: $mainContentBacking;
+  margin: 0 $standardPadding;
+  border-radius: 1.5rem;
+}
+
+.brand-name {
+  font-family: 'Noto Serif', serif;
 }
 
 .control-bar {
-  background-color: #34a0a4;
+  background-color: $backing;
   min-height: 100rem;
-  width: 30%;
+  width: 13%;
   border-radius: 1.5rem;
   max-width: 30rem;
 
   nav {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 }
 
 .control-bar__btn {
-  padding: 2rem;
+  padding: $standardPadding;
   font-weight: 900;
-  background-color: $accentColor;
-  border: solid 1px darken($accentColor, 15);
-  border-width: 0 0 1px 0;
+  border-radius: 1.5rem;
+  background-color: $backing;
   text-transform: uppercase;
-
-  &:first-child {
-    border-width: 1px 0;
-  }
+  width: 100%;
+  text-align: left;
 
   &:hover {
-    background-color: $lightAccentColor;
+    background-color: $accentColor;
   }
 }
+
+// User Section
+
+.user-section {
+  width: 22%;
+  border: 2px solid #34a0a4;
+}
+
+// DashBoard Content
 
 #userGreet {
   font-size: 2rem;
@@ -72,8 +84,7 @@ main {
 
 .welcome-bar {
   background-color: $lightAccentColor;
-  padding: 2rem;
-  margin: 0 0 2rem 2rem;
+  padding: $standardPadding;
   border-radius: 1.5rem;
   display: flex;
   align-items: center;
@@ -92,130 +103,114 @@ main {
   }
 }
 
+.destination-board,
 .trips-board {
   background-color: $accentColor;
-  margin: 0 2rem 2rem 2rem;
+  margin: 2rem 0;
   border-radius: 1.5rem;
   padding: 1rem;
-  width: 40%;
-  max-width: 100rem;
+  width: 100%;
 }
 
+.destination-board__group,
 .trips-board__group {
   background-color: $lightAccentColor;
   min-height: 57rem;
   text-align: center;
-  // border: solid 2px black;
 }
 
+.destination-board__group,
 .trips-board__group--list {
-  padding: 2rem;
+  padding: $standardPadding;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $standardPadding;
 }
 
+.trips-board__tab-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.destination-board__tab,
 .trips-board__tab {
   padding: 1rem;
   border: 0;
-  width: 32.8%;
-  max-width: 60rem;
   min-height: 3rem;
   border-radius: 1.5rem 1.5rem 0 0;
-
 
   &.active {
     background-color: $lightAccentColor;
   }
 }
 
-// .trips-board__tab__num {
- 
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // margin: 0 1rem;
-  // background-color: #faa307;
-  // height: 2rem;
-  // width: 2rem;
-  // border-radius: 1000rem;
-// }
-
 // Trip Card
 
 .tripCard {
   text-align: left;
   background-color: #fff;
-  max-width: 40rem;
   padding: 1rem;
   border-radius: 2rem;
   display: flex;
-  margin-bottom: 2rem;
+  box-shadow: 0 0 0.8rem 0.2rem rgba(0, 0, 0, 0.2);
 }
 
 .tripCard__img {
   object-fit: fill;
   height: 10rem;
-  width: 10rem;
+  width: 13rem;
   object-fit: cover;
   object-position: center;
   border-radius: 2rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 .tripCard__info {
   position: relative;
   width: 100%;
-
-  .tripCard__location {
-    font-weight: 900;
-    font-size: 2rem;
-  }
-
-  .tripCard__date {
-    font-size: 1.4rem;
-    bottom: 0;
-  }
-
-  .tripCard__travlers {
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 1rem;
-  }
-
-  .tripCard__btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 3rem;
-    width: 3rem;
-    background-color: #faa307;
-    border-radius: 1000rem;
-    padding: 1.2rem;
-    font-weight: 900;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  
-    &:hover {
-      width: auto;
-    }
-  }
+  display: flex;
+  flex-direction: column;
 }
 
+.tripCard__location {
+  font-weight: 900;
+  font-size: 2rem;
+}
 
+.tripCard__date {
+  font-size: 1.4rem;
+  bottom: 0;
+}
 
+.tripCard__travlers {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1rem;
+}
+
+.tripCard__btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 3rem;
+  width: 3rem;
+  background-color: #faa307;
+  border-radius: 1000rem;
+  padding: 1.2rem;
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    width: auto;
+  }
+}
 
 // Destination Card
 
-.destCard {
-  background-color: white;
-  max-width: 20rem;
-  padding: 1rem;
-  border-radius: 2rem;
-  position: relative;
-}
-
-.destCard__img {
-  width: 100%;
-  border-radius: 2rem;
+.destCard__price--block {
+  margin-top: 4.5rem;
 }
 
 .destCard__price {
@@ -223,21 +218,12 @@ main {
   border-radius: 100rem;
   background-color: #f1f2f6;
   padding: 0.6rem;
+  margin-right: 0.5rem;
 
   span {
     font-size: 1.4rem;
     color: grey;
   }
-}
-
-.destCard__button {
-  background-color: #34a0a4;
-  color: white;
-  padding: 0.6rem;
-  border-radius: 100rem;
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
 }
 
 .hidden {

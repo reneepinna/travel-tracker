@@ -7,27 +7,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&family=Noto+Serif:wght@700&display=swap"
       rel="stylesheet"
     />
     <title>Travelr</title>
   </head>
   <body>
     <aside class="control-bar">
-      <h1>Travelr</h1>
-      <p id="costThisYear"></p>
+      <h1 class="brand-name">Travelr</h1>
       <nav>
-        <button class="control-bar__btn">Home</button>
-        <button class="control-bar__btn">Account</button>
-        <button class="control-bar__btn">Settings</button>
+        <div>
+          <button id="trips-board__btn" class="control-bar__btn">
+            Dashboard
+          </button>
+          <button id="destination-board__btn" class="control-bar__btn booking">
+            Booking
+          </button>
+        </div>
+        <button id="log-out__btn" class="log-out__btn">Log Out</button>
       </nav>
     </aside>
     <main>
       <div class="welcome-bar">
         <p id="userGreet"></p>
-        <button class="welcome-bar__btn book-btn">Book</button>
+        <p class="get-error"></p>
       </div>
-      <section class="trips-board">
+      <section id="trips-board" class="trips-board board">
         <div class="trips-board__tab-bar">
           <button id="upcoming" class="trips-board__tab active">
             Upcoming
@@ -57,7 +62,55 @@
           <p id="pastGroupMsg" class="trips-board__empty">Nothing here yet!</p>
         </article>
       </section>
+      <!-- Destinations -->
+      <section
+        id="destination-board"
+        class="destination-board board booking hidden"
+      >
+        <div class="destination-board__bar">
+          <p class="destination-board__tab">Book with us</p>
+        </div>
+        <div class="destination-board__group"></div>
+      </section>
+      <!-- Form -->
+      <div class="form-wrapper hidden">
+        <button class="close-form-btn">X</button>
+        <p class="form-error"></p>
+        <form class="destination-form">
+          <label for="destinationID">Where to</label>
+          <select
+            name="destinationID"
+            id="destination-select"
+            required
+          ></select>
+          <label for="travelers">How many travlers?</label>
+          <input
+            type="number"
+            name="travelers"
+            id="numTravelers"
+            max="25"
+            min="1"
+            required
+          />
+          <label for="startDate">What is your start date?</label>
+          <input type="date" name="startDate" id="startDate" required />
+          <label for="endDate">What is your end date?</label>
+          <input type="date" name="endDate" id="endDate" required />
+          <input type="submit" value="Book Trip" id="submitButton" />
+        </form>
+      </div>
     </main>
+    <section class="user-section">
+      <section class="profile">
+        <img class="profile__img" />
+        <div class="profile__text-box">
+          <p class="profile__name"></p>
+          <p class="profile__passport">Passport: Approved</p>
+          <p id="costThisYear"></p>
+        </div>
+        <div class="calendar"></div>
+      </section>
+    </section>
     <script src="bundle.js"></script>
   </body>
 </html>
