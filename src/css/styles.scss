@@ -172,40 +172,40 @@ main {
   flex-direction: column;
 }
 
-  .tripCard__location {
-    font-weight: 900;
-    font-size: 2rem;
-  }
+.tripCard__location {
+  font-weight: 900;
+  font-size: 2rem;
+}
 
-  .tripCard__date {
-    font-size: 1.4rem;
-    bottom: 0;
-  }
+.tripCard__date {
+  font-size: 1.4rem;
+  bottom: 0;
+}
 
-  .tripCard__travlers {
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 1rem;
-  }
+.tripCard__travlers {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1rem;
+}
 
-  .tripCard__btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 3rem;
-    width: 3rem;
-    background-color: #faa307;
-    border-radius: 1000rem;
-    padding: 1.2rem;
-    font-weight: 900;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.tripCard__btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 3rem;
+  width: 3rem;
+  background-color: #faa307;
+  border-radius: 1000rem;
+  padding: 1.2rem;
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    &:hover {
-      width: auto;
-    }
+  &:hover {
+    width: auto;
   }
+}
 
 // Destination Card
 
@@ -218,7 +218,7 @@ main {
   border-radius: 100rem;
   background-color: #f1f2f6;
   padding: 0.6rem;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 
   span {
     font-size: 1.4rem;

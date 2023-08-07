@@ -1,19 +1,19 @@
-import { store , displayDashboard} from "./scripts";
-import { getUserTrips, sortTripGroup } from "./model";
+import { store, displayDashboard } from './scripts';
+import { getUserTrips, sortTripGroup } from './model';
 
-const getErrorBox = document.querySelector('.get-error')
-const formErrorBox = document.querySelector('.form-error')
+const getErrorBox = document.querySelector('.get-error');
+const formErrorBox = document.querySelector('.form-error');
 
 export function getApiData(url, key) {
   return fetch(url)
     .then(response => {
       if (!response.ok) {
-        throw new Error('Oops, something went wrong! :/')
+        throw new Error('Oops, something went wrong! :/');
       }
-      return response.json()
+      return response.json();
     })
     .then(data => data[key] || data)
-    .catch(error => getErrorBox.innerText = error)
+    .catch(error => (getErrorBox.innerText = error));
 }
 
 export function setApiData(body) {
@@ -31,7 +31,7 @@ export function setApiData(body) {
       return response.json();
     })
     .then(resp => updateTrips())
-    .catch(error => formErrorBox.innerText = error);
+    .catch(error => (formErrorBox.innerText = error));
 }
 
 export function updateTrips() {

@@ -170,7 +170,7 @@ function closeForm() {
   formWrapper.classList.add('hidden');
   destinationBoardGroup.classList.remove('hidden');
   form.reset();
-  formErrorBox.innerText = ''
+  formErrorBox.innerText = '';
 }
 
 function formatFormData() {
@@ -194,9 +194,8 @@ function formatFormData() {
 
 function validateTripDate(body) {
   if (body.duration <= 0) {
-    formErrorBox.innerText = `Your trip's end date must be after your trip's start date.`
+    formErrorBox.innerText = `Your trip's end date must be after your trip's start date.`;
   }
-  
 }
 
 //Event Listeners
@@ -223,8 +222,8 @@ destinationBoardGroup.addEventListener('click', e => {
 form.addEventListener('submit', e => {
   e.preventDefault();
   form.reportValidity();
-  
-  if (validateTripDate(formatFormData())){
+
+  if (validateTripDate(formatFormData())) {
     setApiData(formatFormData());
     closeForm();
     changeBoardView('trips-board');
