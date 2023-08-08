@@ -100,14 +100,16 @@ body {
 
 .brand-name {
   font-family: 'Noto Serif', serif;
+  margin: 2.5rem;
 }
 
 .control-bar {
   background-color: $backing;
-  min-height: 100rem;
+  min-height: 100%;
   width: 13%;
   border-radius: 1.5rem;
   max-width: 30rem;
+  padding: $standardPadding 0;
 
   nav {
     display: flex;
@@ -124,6 +126,7 @@ body {
   text-transform: uppercase;
   width: 100%;
   text-align: left;
+  margin: 1rem 0;
 
   &:hover {
     background-color: $accentColor;
@@ -322,6 +325,8 @@ main {
   box-shadow: $standardShadow;
   background-color: $backing;
   @include form;
+  text-align: left;
+  margin: 0 auto;
 }
 
 .destination-form {
@@ -360,6 +365,7 @@ label {
   border-radius: 0.7rem;
   background-color: $buttonColor;
   margin-top: 2rem;
+  width: 100%;
 }
 
 .date-section {
@@ -378,7 +384,34 @@ label {
 
 .user-section {
   width: 22%;
-  border: 2px solid #34a0a4;
+  padding: $standardPadding 0;
+}
+
+.profile-header {
+  width: 100%;
+  display: flex;
+}
+
+.profile__name {
+  padding: 0.5rem 2rem;
+  width: 70%;
+}
+
+.profile {
+  padding: 1rem;
+}
+
+.profile__img {
+  height: 5rem;
+  width: 5rem;
+  background-color: #34a0a4;
+  border-radius: 1000rem;
+}
+
+.profile__text-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-top: 1px solid $lightAccentColor;
 }
 
 // Util
