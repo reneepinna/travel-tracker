@@ -6,20 +6,24 @@ Travelr is a travel agency site that allows registered users to see their travel
 ## 📷 Preview of App:
 Preview of the application
 
+![Travelr Gif](https://github.com/reneepinna/travel-tracker/assets/130389530/d362c5b5-d964-43e9-a409-b085ab9aac4a)
+
 ## 💻 Installation instructions
-To use this website you will need both the api server and the app to run locally on your machine
+To use this website you will 
+need both the api server and the app to run locally on your machine
 
 Follow the instruction in the server's README.md at the [travel-tracker-api repo]([https://www.google.com](https://github.com/turingschool-examples/travel-tracker-api))
 
-Fork the travel-tracker repository
-Clone down your new repository to your local machine
-Cd into the repository on your local machine
-run npm install
-run npm start
+- Fork the travel-tracker repository
+- Clone down your new repository to your local machine
+- Cd into the repository on your local machine
+- run npm install
+- run npm start
 
 The traveler login info is : 
-username: traveler1 through traveler50
-password: travel
+
+- username: traveler1 through traveler50
+- password: travel
 
 ## 🍎 Context:
 The Travel Tracker application is a solo project that was assigned in the fifth week of Mod 2 at the Turing School of Software and Design.
