@@ -1,5 +1,10 @@
 import { setApiData } from './apiCalls';
-import { getNewId, validatePassword, validateUserName, getTripCost} from './model';
+import {
+  getNewId,
+  validatePassword,
+  validateUserName,
+  getTripCost,
+} from './model';
 import { store, initializeData } from './scripts';
 
 const dayjs = require('dayjs');
@@ -8,6 +13,7 @@ const dayjs = require('dayjs');
 const loginPage = document.querySelector('.login-page');
 const loginForm = document.querySelector('.login-form');
 const mainSite = document.querySelector('.website');
+const loginError = document.querySelector('.login-error-box')
 
 const userGreet = document.getElementById('userGreet');
 const userName = document.querySelector('.profile__name');
@@ -32,12 +38,44 @@ const form = document.querySelector('.destination-form');
 const estimatedCostForm = document.querySelector('.estimated-cost-form');
 const closeFormBtn = document.querySelector('.close-form-btn');
 const formErrorBox = document.querySelector('.form-error');
-const estimatedCost = document.querySelector('.estimated-cost')
+const estimatedCost = document.querySelector('.estimated-cost');
 
+// Toggle Screen States
 export function toggleLogInState() {
   loginPage.classList.toggle('hidden');
   mainSite.classList.toggle('hidden');
 }
+
+export function changeTabVeiw(tabID) {
+  tabs.forEach(tab => {
+    if (tab.id === tabID) {
+      tab.classList.add('active');
+    } else {
+      tab.classList.remove('active');
+    }
+  });
+
+  tabGroups.forEach(tabGroup => {
+    if (tabGroup.id === `${tabID}Group`) {
+      tabGroup.classList.remove('hidden');
+    } else {
+      tabGroup.classList.add('hidden');
+    }
+  });
+}
+
+export function changeBoardView(boardName) {
+  boards.forEach(board => {
+    if (boardName.includes(board.id)) {
+      console.log(boardName, board.id);
+      board.classList.remove('hidden');
+    } else {
+      board.classList.add('hidden');
+    }
+  });
+}
+
+// Display Functions
 
 export function displayUserData(user) {
   userGreet.innerText = `Welcome ${user.name.split(' ')[0]}`;
@@ -107,6 +145,10 @@ export function renderDestinationCards(destinations) {
   });
 }
 
+export function displayCostThisYear(costThisYear) {
+  costThisYearBox.innerText = `${costThisYear}`;
+}
+
 function formatTravlerNumber(num) {
   switch (num) {
     case 1:
@@ -118,27 +160,11 @@ function formatTravlerNumber(num) {
   }
 }
 
-export function displayCostThisYear(costThisYear) {
-  costThisYearBox.innerText = `${costThisYear}`;
+export function displayLoginError(error) {
+  loginError.innerText = error;
 }
 
-export function changeTabVeiw(tabID) {
-  tabs.forEach(tab => {
-    if (tab.id === tabID) {
-      tab.classList.add('active');
-    } else {
-      tab.classList.remove('active');
-    }
-  });
-
-  tabGroups.forEach(tabGroup => {
-    if (tabGroup.id === `${tabID}Group`) {
-      tabGroup.classList.remove('hidden');
-    } else {
-      tabGroup.classList.add('hidden');
-    }
-  });
-}
+// Form Functions
 
 export function initializeForm(destinations) {
   const today = dayjs().format('YYYY-MM-DD');
@@ -152,17 +178,6 @@ export function initializeForm(destinations) {
       destination.destination,
       destination.id,
     );
-  });
-}
-
-export function changeBoardView(boardName) {
-  boards.forEach(board => {
-    if (boardName.includes(board.id)) {
-      console.log(boardName, board.id);
-      board.classList.remove('hidden');
-    } else {
-      board.classList.add('hidden');
-    }
   });
 }
 
@@ -221,17 +236,16 @@ function validateTripDate(body) {
 
 loginForm.addEventListener('submit', e => {
   e.preventDefault();
-  form.reportValidity();
+  loginForm.reportValidity();
 
   const loginData = getLoginFormData();
   const userID = validateUserName(loginData.userName);
   if (!userID || !validatePassword(loginData.password)) {
-    document.querySelector(
-      '.login-error-box',
-    ).innerText = `Your Username or Password is incorrect`;
+   displayLoginError(`Your Username or Password is incorrect`);
   } else {
     initializeData(userID);
   }
+  loginForm.reset()
 });
 
 tabBar.addEventListener('click', e => {
@@ -258,12 +272,15 @@ form.addEventListener('submit', e => {
   e.preventDefault();
   form.reportValidity();
 
-  const formData = formatFormData()
+  const formData = formatFormData();
 
   if (validateTripDate(formData)) {
     form.classList.toggle('hidden');
     estimatedCostForm.classList.toggle('hidden');
-    estimatedCost.innerText = `This trip is estimated to cost about ${getTripCost(formData, store.getKey('destinations'))} dollars.`
+    estimatedCost.innerText = `This trip is estimated to cost about ${getTripCost(
+      formData,
+      store.getKey('destinations'),
+    )} dollars.`;
   }
 });
 
