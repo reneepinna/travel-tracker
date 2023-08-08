@@ -5,7 +5,7 @@ import {
   validateUserName,
   getTripCost,
 } from './model';
-import { store, initializeData } from './scripts';
+import { store, initializeUser } from './scripts';
 
 const dayjs = require('dayjs');
 
@@ -67,7 +67,6 @@ export function changeTabVeiw(tabID) {
 export function changeBoardView(boardName) {
   boards.forEach(board => {
     if (boardName.includes(board.id)) {
-      console.log(boardName, board.id);
       board.classList.remove('hidden');
     } else {
       board.classList.add('hidden');
@@ -243,7 +242,8 @@ loginForm.addEventListener('submit', e => {
   if (!userID || !validatePassword(loginData.password)) {
    displayLoginError(`Your Username or Password is incorrect`);
   } else {
-    initializeData(userID);
+    initializeUser(userID)
+
   }
   loginForm.reset()
 });

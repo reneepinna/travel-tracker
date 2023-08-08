@@ -1,4 +1,4 @@
-import './images/samuel-ferrara-1527pjeb6jg-unsplash.jpg'
+import './images/samuel-ferrara-1527pjeb6jg-unsplash.jpg';
 import './css/styles.scss';
 const dayjs = require('dayjs');
 
@@ -8,14 +8,15 @@ import {
   getUserTrips,
   sortTripGroup,
 } from './model';
-import { getApiData } from './apiCalls';
+import { getApiData, getApiUserData } from './apiCalls';
 import {
   displayCostThisYear,
+  displayLoginError,
   displayUserData,
   displayUserTrips,
   initializeForm,
   renderDestinationCards,
-  toggleLogInState
+  toggleLogInState,
 } from './dom-updates';
 
 function initializeStore() {
@@ -40,15 +41,17 @@ window.addEventListener('load', () => {
   store = initializeStore();
 });
 
+export function initializeUser(userID) {
+  getApiUserData(`http://localhost:3001/api/v1/travelers/${userID}`)
+}
+
 export function initializeData(userID) {
   Promise.all([
-    getApiData(`http://localhost:3001/api/v1/travelers/${userID}`),
     getApiData('http://localhost:3001/api/v1/trips', 'trips'),
     getApiData('http://localhost:3001/api/v1/destinations', 'destinations'),
   ])
     .then(values => {
-      const [user, trips, destinations] = values;
-      store.setKey('user', user);
+      const [trips, destinations] = values;
       store.setKey('trips', trips);
       store.setKey('destinations', destinations);
       store.setKey('userTrips', getUserTrips(trips, userID));
@@ -62,7 +65,7 @@ export function initializeData(userID) {
           store.getKey('destinations'),
         ),
       );
-      toggleLogInState()
+      toggleLogInState();
       displayDashboard();
       displayDestination();
     });
