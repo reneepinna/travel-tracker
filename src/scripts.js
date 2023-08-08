@@ -1,4 +1,3 @@
-
 import './images/paul-pastourmatzis-km74CLco7qs-unsplash.jpg'
 import './css/styles.scss';
 const dayjs = require('dayjs');
@@ -40,6 +39,10 @@ window.addEventListener('load', () => {
   store = initializeStore();
   initializeData(16);
 });
+
+document.querySelector('.login-form').addEventListener('submit', () => {
+  
+})
 
 function initializeData(userID) {
   Promise.all([
