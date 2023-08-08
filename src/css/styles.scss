@@ -209,6 +209,7 @@ main {
 }
 
 .trips-board__tab {
+  cursor: pointer;
   @include tabShape;
 
   &.active {
@@ -366,6 +367,7 @@ label {
   background-color: $buttonColor;
   margin-top: 2rem;
   width: 100%;
+  cursor: pointer;
 }
 
 .date-section {
@@ -414,8 +416,13 @@ label {
   border-top: 1px solid $lightAccentColor;
 }
 
+button {
+  cursor: pointer;
+}
+
 // Util
 
 .hidden {
   display: none;
 }
+
