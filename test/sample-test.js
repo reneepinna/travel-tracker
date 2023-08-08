@@ -161,7 +161,7 @@ describe('getCostThisYear', () => {
 
     const cost = getCostThisYear(userTrips, data.destinations);
 
-    expect(cost).to.equal(7216);
+    expect(cost).to.equal(`You've put 7216 dollars into your journeys this year`);
   });
 
   it('should return 0 if there are no trips for this year', () => {
@@ -170,7 +170,7 @@ describe('getCostThisYear', () => {
   
     const cost = getCostThisYear(userTrips, data.destinations);
 
-    expect(cost).to.equal(0);
+    expect(cost).to.equal(`You've put 0 dollars into your journeys this year`);
   });
 
   it('should only calculate the cost for approved trips booked for this year', () => {
@@ -179,13 +179,13 @@ describe('getCostThisYear', () => {
 
     const cost = getCostThisYear(userTrips, data.destinations);
 
-    expect(cost).to.equal(28270);
+    expect(cost).to.equal(`You've put 28270 dollars into your journeys this year`);
   });
 });
 
 describe('', () => {
   it('should return a number that represents the user is if the username is correct', () => {
-    const username = 'traveler35';
+    const username = 'traveler50';
     const userID = validateUserName(username);
 
     expect(userID).to.equal(50)
