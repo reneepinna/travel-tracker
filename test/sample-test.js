@@ -2,7 +2,7 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import data from './sample-data.js';
-import { getUserTrips, sortTripGroup, getCostThisYear, validateUserName } from '../src/model.js';
+import { getUserTrips, sortTripGroup, getCostThisYear, validateUserName, validatePassword } from '../src/model.js';
 
 describe('getUserTrips', function () {
   it('should return an array of only trips the user has taken', () => {
@@ -183,7 +183,7 @@ describe('getCostThisYear', () => {
   });
 });
 
-describe('', () => {
+describe('validate username and password', () => {
   it('should return a number that represents the user is if the username is correct', () => {
     const username = 'traveler50';
     const userID = validateUserName(username);
@@ -195,5 +195,17 @@ describe('', () => {
     const userID = validateUserName(username);
 
     expect(userID).to.equal(null)
-  }) 
+  })
+  it('should return true if the password is correct', () => {
+    const password = 'travel'
+    const result = validatePassword(password)
+
+    expect(result).to.equal(true)
+  })
+  it('should return false if the password is correct', () => {
+    const password = 'stayHome'
+    const result = validatePassword(password)
+
+    expect(result).to.equal(false)
+  })
 })
