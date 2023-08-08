@@ -1,13 +1,13 @@
 import { setApiData } from './apiCalls';
-import { getNewId, validatePassword, validateUserName } from './model';
+import { getNewId, validatePassword, validateUserName, getTripCost} from './model';
 import { store, initializeData } from './scripts';
 
 const dayjs = require('dayjs');
 
 //Query Selectors
-const loginPage = document.querySelector('.login-page')
+const loginPage = document.querySelector('.login-page');
 const loginForm = document.querySelector('.login-form');
-const mainSite = document.querySelector('.website')
+const mainSite = document.querySelector('.website');
 
 const userGreet = document.getElementById('userGreet');
 const userName = document.querySelector('.profile__name');
@@ -29,13 +29,14 @@ const destinationBoardGroup = document.querySelector(
 );
 
 const form = document.querySelector('.destination-form');
-const formWrapper = document.querySelector('.form-wrapper');
+const estimatedCostForm = document.querySelector('.estimated-cost-form');
 const closeFormBtn = document.querySelector('.close-form-btn');
 const formErrorBox = document.querySelector('.form-error');
+const estimatedCost = document.querySelector('.estimated-cost')
 
 export function toggleLogInState() {
-  loginPage.classList.toggle('hidden')
-  mainSite.classList.toggle('hidden')
+  loginPage.classList.toggle('hidden');
+  mainSite.classList.toggle('hidden');
 }
 
 export function displayUserData(user) {
@@ -231,8 +232,6 @@ loginForm.addEventListener('submit', e => {
   } else {
     initializeData(userID);
   }
-
-  
 });
 
 tabBar.addEventListener('click', e => {
@@ -259,12 +258,23 @@ form.addEventListener('submit', e => {
   e.preventDefault();
   form.reportValidity();
 
-  if (validateTripDate(formatFormData())) {
-    setApiData(formatFormData());
-    resetForm();
-    changeBoardView('trips-board');
-    changeTabVeiw('pending');
+  const formData = formatFormData()
+
+  if (validateTripDate(formData)) {
+    form.classList.toggle('hidden');
+    estimatedCostForm.classList.toggle('hidden');
+    estimatedCost.innerText = `This trip is estimated to cost about ${getTripCost(formData, store.getKey('destinations'))} dollars.`
   }
+});
+
+estimatedCostForm.addEventListener('submit', () => {
+  e.preventDefault();
+  setApiData(formatFormData());
+  form.classList.toggle('hidden');
+  estimatedCostForm.classList.toggle('hidden');
+  resetForm();
+  changeBoardView('trips-board');
+  changeTabVeiw('pending');
 });
 
 closeFormBtn.addEventListener('click', () => {

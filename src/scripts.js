@@ -1,4 +1,4 @@
-import './images/paul-pastourmatzis-km74CLco7qs-unsplash.jpg'
+import './images/samuel-ferrara-1527pjeb6jg-unsplash.jpg'
 import './css/styles.scss';
 const dayjs = require('dayjs');
 
