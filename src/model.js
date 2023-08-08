@@ -12,16 +12,18 @@ export function getCostThisYear(trips, destinations) {
   );
 
   const total = thisYearsTrips.reduce((sum, trip) => {
-    const destination = destinations.find(
-      destination => trip.destinationID === destination.id,
-    );
-    return sum + getTripCost(trip, destination);
+  
+    return sum + getTripCost(trip, destinations);
   }, 0);
 
   return `You've put ${Math.round(total)} dollars into your journeys this year`;
 }
 
-export function getTripCost(trip, destination) {
+export function getTripCost(trip, destinations) {
+  const destination = destinations.find(
+    destination => trip.destinationID === destination.id,
+  );
+
   const totalCost =
     (trip.duration * destination.estimatedLodgingCostPerDay +
       destination.estimatedFlightCostPerPerson) *
@@ -29,7 +31,7 @@ export function getTripCost(trip, destination) {
 
   const totalCostWithTip = totalCost * 1.1;
 
-  return totalCostWithTip;
+  return Math.round(totalCostWithTip)
 }
 
 export function sortTripGroup(trips) {
@@ -59,4 +61,19 @@ export function sortTripGroup(trips) {
 
 export function getNewId(trips) {
   return trips.sort((a, b) => b.id - a.id)[0].id + 1;
+}
+
+export function validateUserName(username) {
+  const regex = /traveler(\d{1,})/;
+  const result = username.match(regex)
+
+  if (result) {
+    return parseInt(result[1])
+  }
+
+  return result
+}
+
+export function validatePassword(password) {
+  return (password === 'travel')
 }
