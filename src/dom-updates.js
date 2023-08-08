@@ -284,7 +284,7 @@ form.addEventListener('submit', e => {
   }
 });
 
-estimatedCostForm.addEventListener('submit', () => {
+estimatedCostForm.addEventListener('submit', (e) => {
   e.preventDefault();
   setApiData(formatFormData());
   form.classList.toggle('hidden');
