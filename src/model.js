@@ -60,3 +60,18 @@ export function sortTripGroup(trips) {
 export function getNewId(trips) {
   return trips.sort((a, b) => b.id - a.id)[0].id + 1;
 }
+
+export function validateUserName(username) {
+  const regex = /traveler(\d{1,})/;
+  const result = username.match(regex)
+
+  if (result) {
+    return parseInt(result[1])
+  }
+
+  return result
+}
+
+export function validatePassword(password) {
+  return (password === 'travel')
+}
