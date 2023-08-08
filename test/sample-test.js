@@ -2,7 +2,7 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import data from './sample-data.js';
-import { getUserTrips, sortTripGroup, getCostThisYear } from '../src/model.js';
+import { getUserTrips, sortTripGroup, getCostThisYear, validateUserName, validatePassword } from '../src/model.js';
 
 describe('getUserTrips', function () {
   it('should return an array of only trips the user has taken', () => {
@@ -161,7 +161,7 @@ describe('getCostThisYear', () => {
 
     const cost = getCostThisYear(userTrips, data.destinations);
 
-    expect(cost).to.equal(7216);
+    expect(cost).to.equal(`You've put 7216 dollars into your journeys this year`);
   });
 
   it('should return 0 if there are no trips for this year', () => {
@@ -170,7 +170,7 @@ describe('getCostThisYear', () => {
   
     const cost = getCostThisYear(userTrips, data.destinations);
 
-    expect(cost).to.equal(0);
+    expect(cost).to.equal(`You've put 0 dollars into your journeys this year`);
   });
 
   it('should only calculate the cost for approved trips booked for this year', () => {
@@ -179,6 +179,33 @@ describe('getCostThisYear', () => {
 
     const cost = getCostThisYear(userTrips, data.destinations);
 
-    expect(cost).to.equal(28270);
+    expect(cost).to.equal(`You've put 28270 dollars into your journeys this year`);
   });
 });
+
+describe('validate username and password', () => {
+  it('should return a number that represents the user is if the username is correct', () => {
+    const username = 'traveler50';
+    const userID = validateUserName(username);
+
+    expect(userID).to.equal(50)
+  })
+  it('should return null if the username is not in the correct format', () => {
+    const username = '35traveler';
+    const userID = validateUserName(username);
+
+    expect(userID).to.equal(null)
+  })
+  it('should return true if the password is correct', () => {
+    const password = 'travel'
+    const result = validatePassword(password)
+
+    expect(result).to.equal(true)
+  })
+  it('should return false if the password is correct', () => {
+    const password = 'stayHome'
+    const result = validatePassword(password)
+
+    expect(result).to.equal(false)
+  })
+})
