@@ -15,6 +15,7 @@ import {
   displayUserTrips,
   initializeForm,
   renderDestinationCards,
+  toggleLogInState
 } from './dom-updates';
 
 function initializeStore() {
@@ -37,14 +38,9 @@ export let store;
 
 window.addEventListener('load', () => {
   store = initializeStore();
-  initializeData(16);
 });
 
-document.querySelector('.login-form').addEventListener('submit', () => {
-  
-})
-
-function initializeData(userID) {
+export function initializeData(userID) {
   Promise.all([
     getApiData(`http://localhost:3001/api/v1/travelers/${userID}`),
     getApiData('http://localhost:3001/api/v1/trips', 'trips'),
@@ -66,6 +62,7 @@ function initializeData(userID) {
           store.getKey('destinations'),
         ),
       );
+      toggleLogInState()
       displayDashboard();
       displayDestination();
     });

@@ -25,7 +25,7 @@ html {
 body {
   font-size: 1.6rem;
   font-family: 'Lato', sans-serif;
-  display: flex;
+  
   width: 100%;
   
 }
@@ -115,6 +115,8 @@ body {
 .website {
   background-color: $backing;
   padding: $standardPadding;
+  display: flex;
+  width: 100%;
 }
 
 main {

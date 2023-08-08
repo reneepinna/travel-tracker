@@ -22,14 +22,16 @@
           <span class="login-header-2">Journey</span>
         </h2>
         <form class="login-form">
+          <p class="login-error-box"></p>
           <label class="login-form-label" for="username">Username</label>
-          <input class="login-form-input" type="text" id="username" name="username" />
+          <input class="login-form-input" type="text" id="username" name="username" required/>
           <label class="login-form-label" for="password">Password</label>
           <input
             class="login-form-input"
             type="password"
             id="password"
             name="password"
+            required
           />
           <input type="submit" class="login-submit submit" value="Log In">
         </form>

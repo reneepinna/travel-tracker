@@ -1,11 +1,13 @@
 import { setApiData } from './apiCalls';
 import { getNewId, validatePassword, validateUserName } from './model';
-import { store } from './scripts';
+import { store, initializeData } from './scripts';
 
 const dayjs = require('dayjs');
 
 //Query Selectors
+const loginPage = document.querySelector('.login-page')
 const loginForm = document.querySelector('.login-form');
+const mainSite = document.querySelector('.website')
 
 const userGreet = document.getElementById('userGreet');
 const userName = document.querySelector('.profile__name');
@@ -30,6 +32,11 @@ const form = document.querySelector('.destination-form');
 const formWrapper = document.querySelector('.form-wrapper');
 const closeFormBtn = document.querySelector('.close-form-btn');
 const formErrorBox = document.querySelector('.form-error');
+
+export function toggleLogInState() {
+  loginPage.classList.toggle('hidden')
+  mainSite.classList.toggle('hidden')
+}
 
 export function displayUserData(user) {
   userGreet.innerText = `Welcome ${user.name.split(' ')[0]}`;
