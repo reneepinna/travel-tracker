@@ -40,12 +40,11 @@ body {
 
 .control-bar {
   background-color: $backing;
-  min-height: 100rem;
+  min-height: 100%;
   width: 13%;
   border-radius: 1.5rem;
   max-width: 30rem;
-
-  padding: 2rem 0;
+  padding: $standardPadding 0;
 
   nav {
     display: flex;
@@ -258,7 +257,7 @@ main {
   justify-content: space-between;
   box-shadow: $standardShadow;
   text-align: left;
-  margin:  0 auto;
+  margin: 0 auto;
 }
 
 .destination-form {
@@ -312,7 +311,34 @@ label {
 
 .user-section {
   width: 22%;
-  border: 2px solid #34a0a4;
+  padding: $standardPadding 0;
+}
+
+.profile-header {
+  width: 100%;
+  display: flex;
+}
+
+.profile__name {
+  padding: 0.5rem 2rem;
+  width: 70%;
+}
+
+.profile {
+  padding: 1rem;
+}
+
+.profile__img {
+  height: 5rem;
+  width: 5rem;
+  background-color: #34a0a4;
+  border-radius: 1000rem;
+}
+
+.profile__text-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-top: 1px solid $lightAccentColor;
 }
 
 // Util
