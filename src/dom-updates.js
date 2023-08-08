@@ -227,8 +227,9 @@ function getLoginFormData() {
 function validateTripDate(body) {
   if (body.duration <= 0) {
     formErrorBox.innerText = `Your trip's end date must be after your trip's start date.`;
+  } else {
+    return true;
   }
-  return true;
 }
 
 //Event Listeners
@@ -243,7 +244,6 @@ loginForm.addEventListener('submit', e => {
    displayLoginError(`Your Username or Password is incorrect`);
   } else {
     initializeUser(userID)
-
   }
   loginForm.reset()
 });
